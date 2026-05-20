@@ -1,0 +1,458 @@
+\documentclass[12pt,a4paper,oneside]{report}
+
+% --- PACOTES ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{indentfirst}
+\usepackage{setspace}
+\usepackage[top=3cm,bottom=2cm,left=3cm,right=2cm]{geometry}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{tocloft}
+\usepackage[hidelinks]{hyperref}
+
+% --- CORES ---
+\definecolor{pucblue}{RGB}{0, 51, 102}
+
+% --- TÍTULOS ---
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\color{pucblue}}{\chaptertitlename\ \thechapter}{10pt}{\Huge}
+\titleformat{\section}
+  {\normalfont\large\bfseries\color{pucblue}}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
+
+% --- SUMÁRIO ---
+\renewcommand{\cftchapfont}{\bfseries\color{pucblue}}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+
+\begin{document}
+
+% --- CAPA ---
+\begin{titlepage}
+    \begin{center}
+        \large\textbf{\uppercase{Pontifícia Universidade Católica de Minas Gerais}}\\[0.2cm]
+        \large\textbf{\uppercase{Sistemas de Informação}}\\[4cm]
+        
+        \huge\textbf{\color{pucblue}Projeto de Infraestrutura de Redes:\\ Rede Hospitalar Cuidar}\\[0.5cm]
+        \large\textit{Documento de Planejamento e Implementação}\\[3cm]
+        
+        \begin{flushleft}
+            \textbf{Grupo de Trabalho:}\\
+            \small
+            Athos Geraldo Salomon Dolabela da Silveira\\
+            Bernardo Elias Renttins Vasconcelos de Sousa\\
+            Fabrício Junio da Silva\\
+            Henrique Fadel Carvalho\\
+            Igor de Oliveira Martins dos Santos\\
+            Pedro Tolentino Gontijo
+        \end{flushleft}
+        
+        \vfill
+        \large\textbf{Belo Horizonte}\\
+        \large\textbf{2026}
+    \end{center}
+\end{titlepage}
+
+% --- SUMÁRIO ---
+\newpage
+\tableofcontents
+\newpage
+\setstretch{1.5}
+
+% ============================================================
+% ETAPA 1
+% ============================================================
+\chapter{Etapa 1 --- Planejamento e Prototipação}
+
+\section{Gestão e Organização do Projeto}
+
+\subsection{Definição do Tema e Cenário}
+O projeto foca na \textbf{Rede Hospitalar Cuidar}, uma instituição de saúde com matriz em Belo Horizonte e unidades remotas (Secretaria e três UPAs). O cenário exige alta disponibilidade e segmentação, dado o tráfego de dados sensíveis e a necessidade de comunicação ininterrupta para prontuários eletrônicos.
+
+\subsection{Responsabilidades e Colaboração}
+Para atender à gestão da comunicação e colaboração, o grupo utilizou ferramentas como Microsoft Teams e WhatsApp para alinhamento síncrono e assíncrono.
+\begin{itemize}[label=\color{pucblue}$\bullet$]
+    \item \textbf{Igor e Pedro:} Planejamento de sub-redes (CIDR), NAT e lógica de serviços.
+    \item \textbf{Henrique:} Implementação técnica e nomenclatura no Cisco Packet Tracer.
+    \item \textbf{Bernardo e Athos:} Gestão de ativos, custos e planilhas de inventário.
+    \item \textbf{Fabrício:} Redação técnica e revisão das normas de documentação.
+\end{itemize}
+
+\subsection{Cronograma de Dedicação}
+\begin{center}
+\small
+\begin{tabular}{ll}
+\toprule
+\textbf{Data} & \textbf{Tarefa} \\ \midrule
+09/02 a 28/02 & Estudo dos microfundamentos e definição do cenário. \\
+01/03 a 15/03 & Elaboração do inventário detalhado e cálculos de tráfego. \\
+16/03 a 24/03 & Desenvolvimento do protótipo e testes de conectividade (Ping). \\
+25/03 a 28/03 & Ajustes de nomenclatura conforme feedback e entrega final. \\ \bottomrule
+\end{tabular}
+\end{center}
+
+\section{Arquitetura Lógica e Endereçamento}
+
+\subsection{Divisão por CIDR e NAT}
+A rede utiliza o bloco privado \texttt{10.0.0.0/8}, segmentado para otimizar o domínio de broadcast e aumentar a segurança.
+\begin{center}
+\footnotesize
+\begin{tabular}{llll}
+\toprule
+\textbf{Unidade} & \textbf{Faixa de Rede} & \textbf{Gateway} & \textbf{Servidor Principal} \\ \midrule
+Matriz     & 10.10.0.0/24 & 10.10.0.1 & SRV-BH-PRONTUARIO (10.10.0.10) \\
+Secretaria & 10.20.0.0/24 & 10.20.0.1 & SRV-SEC-ADMIN (10.20.0.10) \\
+UPA 1      & 10.30.0.0/24 & 10.30.0.1 & SRV-UPA1-LOCAL (10.30.0.10) \\
+UPA 2      & 10.40.0.0/24 & 10.40.0.1 & SRV-UPA2-LOCAL (10.40.0.10) \\
+UPA 3      & 10.50.0.0/24 & 10.50.0.1 & SRV-UPA3-LOCAL (10.50.0.10) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{NAT (Network Address Translation):} Implementado nos roteadores de borda para mascarar as redes internas e permitir a saída WAN via IPs públicos simulados, protegendo a integridade da rede hospitalar.
+
+\section{Justificativa de Recursos}
+
+\subsection{Inventário de Equipamentos}
+O inventário foi organizado para equilibrar custo-benefício e robustez. Na Matriz, optamos por \textbf{Switches Cisco Catalyst 9200L} pela capacidade de empilhamento e \textbf{Firewalls FortiGate} para segurança NGFW. O uso de nobreaks senoidais da APC garante que os sistemas de prontuário não sofram quedas por oscilações elétricas.
+
+\subsection{Cálculo de Links e Tráfego}
+Conforme a planilha de cálculos, a Matriz possui um link de 152 Mbps, dimensionado para suportar o tráfego de videoconsultas e sincronização de banco de dados das filiais, que operam com links de 42.4 Mbps cada.
+
+\section{Plano de Testes e Validação}
+Para validar o funcionamento, estabelecemos os seguintes testes no protótipo:
+\begin{enumerate}
+    \item \textbf{Teste de Conectividade Interna:} Pings entre PCs da mesma sub-rede.
+    \item \textbf{Teste de Conectividade WAN:} Pings entre a UPA 3 e o SRV-BH-PRONTUARIO.
+    \item \textbf{Validação de Nomenclatura:} Conferência de que todos os dispositivos seguem o padrão \textit{Unidade-Setor-ID}.
+\end{enumerate}
+
+\section{Conclusão della Etapa 1}
+A Etapa 1 conclui-se com um protótipo funcional e uma documentação que justifica cada ativo escolhido. O projeto está pronto para a próxima fase, garantindo que a infraestrutura física e lógica atenda às demandas críticas da Rede Hospitalar Cuidar.
+
+% ============================================================
+% ETAPA 2
+% ============================================================
+\chapter{Etapa 2 --- Preparação do Ambiente em Nuvem e Virtualização Local}
+
+\section{Introdução}
+A Etapa 2 é marcada pelo mapeamento e implantação dos servidores em nuvem e \textit{on-premise} para o devido atendimento do planejamento inicial. Nesta etapa, adaptações e definições de escopo foram realizadas para garantir a conformidade com o planejamento estabelecido na Etapa 1, bem como para atender às eventuais necessidades identificadas na fase anterior.
+
+\section{Ambiente em Nuvem --- Amazon Web Services (AWS)}
+
+\subsection{Escolha da Plataforma}
+O grupo optou pela utilização do \textbf{Amazon EC2} (Elastic Compute Cloud) como plataforma de nuvem, por ser um dos principais \textit{players} de mercado, oferecendo alta disponibilidade, escalabilidade e um vasto ecossistema de serviços gerenciados adequados à infraestrutura hospitalar da Rede Cuidar.
+
+\subsection{Instâncias Configuradas}
+As instâncias foram criadas conforme o mapeamento de servidores definido na Etapa 1, seguindo as boas práticas de nomenclatura e endereçamento estabelecidas. O \textbf{Windows Server} foi implantado via instância EC2 para atuar como servidor de aplicação para publicação do back-end hospitalar.
+
+\begin{center}
+\small
+\begin{tabular}{ll}
+\toprule
+\textbf{Campo} & \textbf{Informação} \\ \midrule
+Nome da Instância    & Rede Cuidar \\
+ID da Instância      & i-03c0d9df7ad6e2f96 \\
+Tipo de Instância    & t2.large \\
+Sistema Operacional  & Windows Server 2016 Datacenter \\
+IP Público           & 54.80.166.57 \\
+IP Privado           & 10.0.1.84 \\
+Usuário de Acesso    & Administrator \\
+Método de Acesso     & RDP (Área de Trabalho Remota) \\
+Região               & us-east-1 (Norte da Virgínia) \\
+VPC                  & rede-cuidar-vpc (10.0.0.0/16) \\
+Status               & Executando \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Configuração de Segurança --- Acesso Criptografado}
+O acesso às instâncias é realizado por meio de \textbf{SSH com autenticação por par de chaves pública/privada}, garantindo comunicação totalmente criptografada entre os administradores e os servidores em nuvem. Essa abordagem atende às boas práticas de segurança em infraestrutura de redes e assegura que nenhum acesso não autorizado seja possível sem a chave privada correspondente.
+
+\section{Virtualização Local --- Oracle VirtualBox}
+
+\subsection{Configuração do Servidor On-Premise}
+Para o mapeamento dos serviços \textit{on-premise}, foi utilizado o \textbf{Oracle VirtualBox} como plataforma de virtualização. O servidor local foi configurado com o sistema operacional \textbf{Ubuntu Server}, representando o servidor \texttt{SRV-BH-PRONTUARIO} da Matriz, conforme planejado na Etapa 1.
+
+\subsection{Configuração de Rede --- IP Estático}
+O servidor virtual foi configurado com \textbf{endereço IP estático} via \texttt{netplan}, garantindo que o endereço de rede seja fixo e compatível com o plano de infraestrutura. A configuração foi aplicada no arquivo \texttt{/etc/netplan/50-cloud-init.yaml} com os seguintes parâmetros:
+
+\begin{itemize}[label=\color{pucblue}$\bullet$]
+    \item \textbf{Interface:} \texttt{enp0s3}
+    \item \textbf{Endereço IP:} \texttt{192.168.18.75/24}
+    \item \textbf{Gateway:} \texttt{192.168.18.1}
+    \item \textbf{DNS primário:} \texttt{8.8.8.8} (Google DNS)
+    \item \textbf{DNS secundário:} \texttt{8.8.4.4} (Google DNS)
+    \item \textbf{DHCP4:} Desabilitado
+\end{itemize}
+
+\begin{center}
+\small
+\begin{verbatim}
+network:
+  version: 2
+  ethernets:
+    enp0s3:
+      dhcp4: false
+      addresses:
+        - 192.168.18.75/24
+      routes:
+        - to: default
+          via: 192.168.18.1
+      nameservers:
+        addresses:
+          - 8.8.8.8
+          - 8.8.4.4
+\end{verbatim}
+\end{center}
+
+\subsection{Serviços Instalados}
+O servidor Ubuntu foi configurado com os seguintes serviços, atendendo às demandas de infraestrutura hospitalar mapeadas na Etapa 1:
+
+\begin{center}
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Serviço} & \textbf{Função} & \textbf{Porta Padrão} \\ \midrule
+SSH              & Acesso remoto seguro e criptografado ao servidor           & 22  \\
+Apache2          & Servidor Web para publicação de aplicações                 & 80/443 \\
+MySQL            & Banco de dados relacional para prontuários eletrônicos     & 3306 \\
+BIND9/named      & Servidor DNS para resolução de nomes da rede interna      & 53  \\
+DHCP             & Distribuição automática de endereços IP na rede local     & 67  \\
+VSFTPD           & Servidor FTP para transferência segura de arquivos        & 21  \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Todos os serviços foram instalados e configurados conforme as boas práticas de administração de sistemas Linux, garantindo que o servidor \texttt{SRV-BH-PRONTUARIO} esteja apto a atender as demandas da Matriz da Rede Hospitalar Cuidar.
+
+\section{Evidências de Funcionamento}
+
+\subsection{Servidor Ubuntu (VirtualBox) --- IP Estático}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{print_ip_estatico.png}
+    \caption{Servidor Ubuntu On-Premise com IP estático configurado (\texttt{192.168.18.75/24})}
+    \label{fig:ubuntu_ip}
+\end{figure}
+
+\subsection{Servidor Ubuntu (VirtualBox) --- Serviços Ativos}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{print_servicos.png}
+    \caption{Serviços instalados e ativos no servidor Ubuntu On-Premise}
+    \label{fig:ubuntu_servicos}
+\end{figure}
+
+\subsection{Instância AWS EC2 --- Nuvem}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{print_instancia.png}
+    \caption{Instância EC2 ``Rede Cuidar'' em execução no painel da AWS}
+    \label{fig:aws_instancia}
+\end{figure}
+
+\subsection{Windows Server --- Servidor de Aplicação}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{windows_server.png}
+    \caption{Windows Server 2016 Datacenter em execução na instância AWS}
+    \label{fig:windows_server}
+\end{figure}
+
+\subsection{VPC --- Rede Privada Virtual (AWS)}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{print_vpc.png}
+    \caption{VPC \texttt{rede-cuidar-vpc} configurada na AWS com CIDR \texttt{10.0.0.0/16}}
+    \label{fig:vpc}
+\end{figure}
+
+\subsection{Active Directory --- Estrutura do Domínio}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ad_print.png}
+    \caption{Central Administrativa do Active Directory --- domínio \texttt{minasgerais.net}}
+    \label{fig:ad_estrutura}
+\end{figure}
+
+\subsection{Active Directory --- Unidades Organizacionais (OUs)}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{subredes_print.png}
+    \caption{OUs criadas no AD: \texttt{minas} com sub-OUs \texttt{belohorizonte}, \texttt{betim} e \texttt{contagem}}
+    \label{fig:ad_ous}
+\end{figure}
+
+\subsection{Política de Grupo (GPO)}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{gpo_criada.png}
+    \caption{GPO \texttt{pgbh} vinculada à OU \texttt{usuarios} em \texttt{belohorizonte}}
+    \label{fig:gpo}
+\end{figure}
+
+\section{Vídeo Demonstrativo}
+O vídeo demonstrativo da Etapa 2, exibindo o funcionamento dos ambientes configurados, está disponível no Microsoft Teams pelo link abaixo:
+
+\begin{center}
+    \textbf{Link:} \url{https://sgapucminasbr.sharepoint.com/sites/team_sga_2414_2026_1_7378102/_layouts/15/guestaccess.aspx?share=IQBUD9anyHlnSZGWIaAY6TzEAaYO6do7X8C4R6jARODEzeA&e=qDsxRR}
+\end{center}
+
+% ============================================================
+% ETAPA 3
+% ============================================================
+\chapter{Etapa 3 --- Monitoramento Ativo da Infraestrutura de Servidores}
+
+\section{Introdução ao Monitoramento Centralizado}
+Para garantir os critérios de alta disponibilidade, integridade, identificação proativa de gargalos e comunicação ininterrupta exigidos pela \textbf{Rede Hospitalar Cuidar}, foi consolidada uma solução de monitoramento de ativos utilizando a ferramenta corporativa \textbf{Zabbix}.
+
+Nesta etapa, a infraestrutura foi integrada de ponta a ponta, permitindo a coleta de dados de desempenho em tempo real por meio de agentes dedicados e protocolos de rede. A telemetria abrange o consumo de hardware (processamento, memória, E/S de disco) e volumetria de tráfego de dados, fornecendo visibilidade total sobre o ecossistema local e em nuvem.
+
+\section{Topologia Lógica e Visões de Gerência}
+
+\subsection{Mapa de Conectividade da Infraestrutura}
+Abaixo apresenta-se o mapa de topologia estruturado no painel nativo do Zabbix (\textit{All maps / Rede Hospitalar Cuidar}), ilustrando as relações de conectividade e o fluxo saudável de comunicação entre os nós de gerência.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{print_mapa.png}
+    \caption{Mapa de monitoramento integrado da infraestrutura local e nuvem no Zabbix}
+    \label{fig:zabbix_mapa}
+\end{figure}
+
+\subsection{Painel Global de Operações (Dashboard)}
+O monitoramento centralizado conta com um painel de controle principal (\textit{Dashboard}), que agrega os principais indicadores de desempenho do ecossistema hospitalar, facilitando a tomada de decisão em nível de suporte de infraestrutura.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{dashboard_print.png}
+    \caption{Dashboard geral do Zabbix exibindo a saúde integrada do ambiente hospitalar}
+    \label{fig:zabbix_dashboard}
+\end{figure}
+
+\subsection{Inventário de Hosts e Status de Disponibilidade}
+Como evidenciado no painel de controle, todos os hosts monitorados foram devidamente parametrizados e encontram-se operando sem a presença de problemas ou alertas ativos. A integração com o agente Zabbix garante a confiabilidade dos status apresentados.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{hosts_verdes.png}
+    \caption{Listagem de hosts ativos e com status operacional estabilizado}
+    \label{fig:hosts_operacionais}
+\end{figure}
+
+\section{Métricas de Performance --- Servidor Local (srv-bh-prontuario)}
+O servidor local virtualizado, responsável pelo banco de dados de prontuários eletrônicos e serviços internos da Matriz em Belo Horizonte, teve seu comportamento monitorado e os gráficos gerados comprovam a conformidade do ambiente.
+
+\subsection{Utilização de CPU}
+O gráfico ilustra a carga de processamento da CPU do servidor Ubuntu. Nota-se que os níveis operacionais mantêm-se baixos e estáveis, garantindo ampla margem para picos de requisições concorrentes.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{cpu_utilization_ubuntu.png}
+    \caption{Métricas de uso de processador (CPU) no servidor Ubuntu local}
+    \label{fig:cpu_ubuntu}
+\end{figure}
+
+\subsection{Utilização de Memória RAM}
+A telemetria de memória segmenta o espaço total alocado, identificando a fatia utilizada, disponível e em cache, atestando que a máquina não sofre com paginação excessiva em disco.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{memory_utilization_ubuntu.png}
+    \caption{Análise de alocação e consumo de memória RAM do servidor local}
+    \label{fig:memoria_ubuntu}
+\end{figure}
+
+\subsection{E/S de Disco (Leitura e Escrita)}
+Monitorar as operações de entrada e saída por segundo (IOPS) e taxa de transferência é crucial para o banco de dados MySQL. O gráfico confirma baixa latência de gravação física.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{disco_readwirte_ubuntu.png}
+    \caption{Estatísticas de leitura e escrita em disco do servidor de banco de dados}
+    \label{fig:disco_ubuntu}
+\end{figure}
+
+\subsection{Tráfego de Rede}
+O volume de dados trafegado pela interface de rede (\texttt{enp0s3}) exibe o fluxo simétrico de dados de entrada (\textit{In}) e saída (\textit{Out}), atestando a integridade das respostas do Apache2 e DNS BIND9.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{network_traffic_ubuntu.png}
+    \caption{Volume e taxa de transferência de pacotes na interface de rede local}
+    \label{fig:rede_ubuntu}
+\end{figure}
+
+\section{Métricas de Performance --- Servidor em Nuvem (srv-aws-cuidar)}
+A instância EC2 alocada na região de Norte da Virgínia (\texttt{us-east-1}), que atua com o papel de controlador de domínio Active Directory e hospedagem do back-end hospitalar, teve suas métricas consolidadas.
+
+\subsection{Utilização de CPU}
+O monitoramento via contador do Windows Server mapeia as flutuações de uso do processador da instância \texttt{t2.large}. Os dados coletados apontam para um comportamento saudável e livre de gargalos lógicos de processamento.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{cpu_utilization_aws.png}
+    \caption{Métricas de processamento da instância EC2 Windows Server na AWS}
+    \label{fig:cpu_aws}
+\end{figure}
+
+\subsection{Utilização de Memória RAM}
+A telemetria exibe o consumo percentual e em bytes da memória do Windows Server. O gráfico assegura que o Active Directory e as políticas de grupo (GPO) aplicadas estão rodando de forma otimizada.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{memory_utilization_aws.png}
+    \caption{Gráfico de uso de memória física na instância de aplicação em nuvem}
+    \label{fig:memoria_aws}
+\end{figure}
+
+\subsection{Tráfego de Rede na Instância Cloud}
+Os dados exibem o tráfego que cruza a placa de rede virtual conectada à VPC. A estabilidade dos gráficos comprova que, após a parametrização fina dos limiares (\textit{thresholds}) de checagem do Zabbix, a latência geográfica maior devido à rota internacional foi devidamente mitigada, não interferindo na qualidade da coleta contínua de dados do agente.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{rede_utilization_aws.png}
+    \caption{Análise de pacotes enviados e recebidos através da interface WAN da AWS}
+    \label{fig:rede_aws}
+\end{figure}
+
+% ============================================================
+% ETAPA 4
+% ============================================================
+\chapter{Etapa 4 --- [Título a Definir]}
+
+\begin{center}
+    \vspace{2cm}
+    \textit{Este capítulo será preenchido na entrega da Etapa 4.}
+    \vspace{2cm}
+\end{center}
+
+% ============================================================
+% ETAPA 5
+% ============================================================
+\chapter{Etapa 5 --- [Título a Definir]}
+
+\begin{center}
+    \vspace{2cm}
+    \textit{Este capítulo será preenchido na entrega da Etapa 5.}
+    \vspace{2cm}
+\end{center}
+
+\end{document}
