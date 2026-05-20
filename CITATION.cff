@@ -1,29 +1,31 @@
 cff-version: 1.0.1
 message: Please cite this software using these metadata.
-title:
+title: "Projeto de Infraestrutura de Redes: Rede Hospitalar Cuidar"
 authors:
-  - family-names:
-    given-names:
-  - family-names:
-    given-names:
-  - family-names:
-    given-names:
-  - family-names:
-    given-names:
-  - family-names:
-    given-names:
-  - family-names:
-    given-names:
-  - family-names:
-    given-names:
-  - name-suffix: Professor XXXX
+  - family-names: "Dolabela da Silveira"
+    given-names: "Athos Geraldo Salomon"
+  - family-names: "Vasconcelos de Sousa"
+    given-names: "Bernardo Elias Renttins"
+  - family-names: "da Silva"
+    given-names: "Fabrício Junio"
+  - family-names: "Fadel Carvalho"
+    given-names: "Henrique"
+  - family-names: "Martins dos Santos"
+    given-names: "Igor de Oliveira"
+  - family-names: "Tolentino Gontijo"
+    given-names: "Pedro"
+  - name-suffix: Professor
     affiliation: PUC Minas
-    family-names:
-    given-names:
+    family-names: "Teixeira"
+    given-names: Alexandre
 keywords:
-  -
-  -
+  - infraestrutura de redes
+  - hospital
+  - AWS
+  - Zabbix
+  - Active Directory
+  - VirtualBox
 repository-code:
 license: CC-BY-4.0
 version: 1.0.0
-date-released: 2023-06-30
+date-released: 2026-06-30
