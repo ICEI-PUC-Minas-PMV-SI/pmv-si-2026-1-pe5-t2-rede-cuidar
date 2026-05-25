@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rede Hospitalar Cuidar — PUC Minas</title>
+  <style>
+    /* ── Reset & Tokens ────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:   #003366;
+      --primary-l: #004a99;
+      --accent:    #0066cc;
+      --accent-l:  #e8f0fb;
+      --green:     #15803d;
+      --green-l:   #dcfce7;
+      --bg:        #f0f4f8;
+      --surface:   #ffffff;
+      --border:    #dde3ee;
+      --text:      #1e293b;
+      --muted:     #64748b;
+      --code-bg:   #1e293b;
+      --code-text: #e2e8f0;
+      --radius:    10px;
+      --shadow:    0 2px 12px rgba(0,51,102,.10);
+      --shadow-lg: 0 8px 32px rgba(0,51,102,.14);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* ── Header ────────────────────────────────────────── */
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-l) 100%);
+      color: #fff;
+      padding: 3.5rem 1.5rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .header-inner { position: relative; max-width: 860px; margin: 0 auto; }
+    .header-badge {
+      display: inline-block;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 50px;
+      padding: .35rem 1rem;
+      font-size: .8rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    header h1 {
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -.02em;
+      line-height: 1.15;
+      margin-bottom: .6rem;
+    }
+    header p.subtitle {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,.8);
+      font-style: italic;
+    }
+
+    /* ── Navigation ────────────────────────────────────── */
+    nav {
+      background: var(--surface);
+      border-bottom: 2px solid var(--border);
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+    nav ul {
+      display: flex; flex-wrap: wrap; gap: .25rem;
+      list-style: none;
+      max-width: 900px; margin: 0 auto;
+      padding: .5rem 1rem;
+    }
+    nav a {
+      display: block;
+      padding: .45rem .9rem;
+      border-radius: 6px;
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: none;
+      transition: background .15s, color .15s;
+    }
+    nav a:hover { background: var(--accent-l); color: var(--accent); }
+
+    /* ── Layout ─────────────────────────────────────────── */
+    main {
+      max-width: 900px;
+      margin: 2.5rem auto;
+      padding: 0 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    /* ── Cards ──────────────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .card-header {
+      background: linear-gradient(90deg, var(--primary) 0%, var(--primary-l) 100%);
+      color: #fff;
+      padding: 1.1rem 1.5rem;
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .card-header .badge {
+      background: rgba(255,255,255,.2);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 6px;
+      padding: .2rem .65rem;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      white-space: nowrap;
+    }
+    .card-header h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -.01em;
+    }
+    .card-body { padding: 1.75rem 1.5rem; }
+
+    /* ── Section Headings ───────────────────────────────── */
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 1.5rem 0 .65rem;
+      padding-bottom: .4rem;
+      border-bottom: 2px solid var(--accent-l);
+    }
+    h4 {
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 1.2rem 0 .5rem;
+    }
+    p { margin-bottom: .85rem; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── Team Grid ──────────────────────────────────────── */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: .5rem;
+    }
+    .member-card {
+      background: var(--accent-l);
+      border: 1px solid #c7d9f5;
+      border-radius: 8px;
+      padding: .9rem 1rem;
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .member-avatar {
+      width: 40px; height: 40px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-weight: 700; font-size: .9rem;
+      flex-shrink: 0;
+    }
+    .member-name { font-size: .88rem; font-weight: 600; line-height: 1.3; }
+
+    /* ── Tables ─────────────────────────────────────────── */
+    .table-wrap { overflow-x: auto; margin: .75rem 0 1rem; border-radius: 8px; border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    thead tr { background: var(--primary); color: #fff; }
+    thead th { padding: .7rem 1rem; text-align: left; font-weight: 600; white-space: nowrap; }
+    tbody tr:nth-child(even) { background: var(--accent-l); }
+    tbody tr:hover { background: #dde8f8; }
+    tbody td { padding: .65rem 1rem; border-top: 1px solid var(--border); vertical-align: top; }
+    td code { background: #eef2ff; padding: .1em .35em; border-radius: 4px; font-size: .85em; }
+
+    /* ── Lists ──────────────────────────────────────────── */
+    ul, ol { padding-left: 1.4rem; margin-bottom: .85rem; }
+    li { margin-bottom: .35rem; }
+
+    /* ── Code Block ─────────────────────────────────────── */
+    pre {
+      background: var(--code-bg);
+      color: var(--code-text);
+      border-radius: 8px;
+      padding: 1.2rem 1.4rem;
+      overflow-x: auto;
+      font-size: .88rem;
+      line-height: 1.6;
+      margin: .75rem 0 1rem;
+    }
+    code { font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace; }
+    p code, li code {
+      background: #eef2ff;
+      color: var(--primary);
+      padding: .15em .4em;
+      border-radius: 4px;
+      font-size: .88em;
+    }
+
+    /* ── Figures ────────────────────────────────────────── */
+    .figure-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.25rem;
+      margin: 1rem 0;
+    }
+    figure {
+      margin: 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: var(--surface);
+    }
+    figure img {
+      width: 100%;
+      display: block;
+      border-bottom: 1px solid var(--border);
+    }
+    figcaption {
+      padding: .6rem .9rem;
+      font-size: .82rem;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.4;
+    }
+    .figure-full { margin: 1rem 0; }
+    .figure-full img { border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow); }
+
+    /* ── Callout ────────────────────────────────────────── */
+    .callout {
+      border-left: 4px solid var(--accent);
+      background: var(--accent-l);
+      border-radius: 0 8px 8px 0;
+      padding: .85rem 1.2rem;
+      margin: 1rem 0;
+      font-size: .93rem;
+    }
+    .callout.pending {
+      border-color: #f59e0b;
+      background: #fffbeb;
+      color: #78350f;
+    }
+
+    /* ── Video Link ─────────────────────────────────────── */
+    .video-link {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--primary);
+      color: #fff;
+      text-decoration: none;
+      padding: .65rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: .9rem;
+      margin-top: .5rem;
+      transition: background .15s;
+    }
+    .video-link:hover { background: var(--primary-l); }
+
+    /* ── Status Badge ───────────────────────────────────── */
+    .status-ok {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: var(--green-l);
+      color: var(--green);
+      border: 1px solid #bbf7d0;
+      border-radius: 50px;
+      padding: .3rem .85rem;
+      font-size: .82rem;
+      font-weight: 600;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .4; }
+    }
+
+    /* ── Footer ─────────────────────────────────────────── */
+    footer {
+      background: var(--primary);
+      color: rgba(255,255,255,.75);
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-size: .85rem;
+      margin-top: 1rem;
+    }
+    footer strong { color: #fff; }
+
+    /* ── Responsive ─────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .card-body { padding: 1.25rem 1rem; }
+      .figure-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="header-badge">PUC Minas &nbsp;·&nbsp; Sistemas de Informação &nbsp;·&nbsp; Eixo 5</div>
+    <h1>Rede Hospitalar Cuidar</h1>
+    <p class="subtitle">Projeto de Infraestrutura de Redes &mdash; Documento de Planejamento e Implementação</p>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════ NAV -->
+<nav>
+  <ul>
+    <li><a href="#equipe">Equipe</a></li>
+    <li><a href="#etapa1">Etapa 1 &mdash; Planejamento</a></li>
+    <li><a href="#etapa2">Etapa 2 &mdash; Ambiente</a></li>
+    <li><a href="#etapa3">Etapa 3 &mdash; Monitoramento</a></li>
+    <li><a href="#etapa4">Etapa 4</a></li>
+    <li><a href="#etapa5">Etapa 5</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- ═══════════════════════════════════════ EQUIPE -->
+  <section id="equipe" class="card">
+    <div class="card-header">
+      <span class="badge">EQUIPE</span>
+      <h2>Grupo de Trabalho</h2>
+    </div>
+    <div class="card-body">
+      <div class="team-grid">
+        <div class="member-card">
+          <div class="member-avatar">AG</div>
+          <div class="member-name">Athos Geraldo Salomon Dolabela da Silveira</div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar">BE</div>
+          <div class="member-name">Bernardo Elias Renttins Vasconcelos de Sousa</div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar">FJ</div>
+          <div class="member-name">Fabrício Junio da Silva</div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar">HF</div>
+          <div class="member-name">Henrique Fadel Carvalho</div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar">IO</div>
+          <div class="member-name">Igor de Oliveira Martins dos Santos</div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar">PT</div>
+          <div class="member-name">Pedro Tolentino Gontijo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ ETAPA 1 -->
+  <section id="etapa1" class="card">
+    <div class="card-header">
+      <span class="badge">ETAPA 1</span>
+      <h2>Planejamento e Prototipação</h2>
+    </div>
+    <div class="card-body">
+
+      <h3>Gestão e Organização do Projeto</h3>
+
+      <h4>Definição do Tema e Cenário</h4>
+      <p>O projeto foca na <strong>Rede Hospitalar Cuidar</strong>, uma instituição de saúde com matriz em Belo Horizonte e unidades remotas (Secretaria e três UPAs). O cenário exige alta disponibilidade e segmentação, dado o tráfego de dados sensíveis e a necessidade de comunicação ininterrupta para prontuários eletrônicos.</p>
+
+      <h4>Responsabilidades e Colaboração</h4>
+      <p>Para atender à gestão da comunicação e colaboração, o grupo utilizou ferramentas como Microsoft Teams e WhatsApp para alinhamento síncrono e assíncrono.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Integrantes</th><th>Responsabilidade</th></tr></thead>
+          <tbody>
+            <tr><td>Igor e Pedro</td><td>Planejamento de sub-redes (CIDR), NAT e lógica de serviços</td></tr>
+            <tr><td>Henrique</td><td>Implementação técnica e nomenclatura no Cisco Packet Tracer</td></tr>
+            <tr><td>Bernardo e Athos</td><td>Gestão de ativos, custos e planilhas de inventário</td></tr>
+            <tr><td>Fabrício</td><td>Redação técnica e revisão das normas de documentação</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Cronograma de Dedicação</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Data</th><th>Tarefa</th></tr></thead>
+          <tbody>
+            <tr><td>09/02 a 28/02</td><td>Estudo dos microfundamentos e definição do cenário</td></tr>
+            <tr><td>01/03 a 15/03</td><td>Elaboração do inventário detalhado e cálculos de tráfego</td></tr>
+            <tr><td>16/03 a 24/03</td><td>Desenvolvimento do protótipo e testes de conectividade (Ping)</td></tr>
+            <tr><td>25/03 a 28/03</td><td>Ajustes de nomenclatura conforme feedback e entrega final</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Arquitetura Lógica e Endereçamento</h3>
+
+      <h4>Divisão por CIDR e NAT</h4>
+      <p>A rede utiliza o bloco privado <code>10.0.0.0/8</code>, segmentado para otimizar o domínio de broadcast e aumentar a segurança.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Unidade</th><th>Faixa de Rede</th><th>Gateway</th><th>Servidor Principal</th></tr></thead>
+          <tbody>
+            <tr><td>Matriz</td><td><code>10.10.0.0/24</code></td><td><code>10.10.0.1</code></td><td>SRV-BH-PRONTUARIO (<code>10.10.0.10</code>)</td></tr>
+            <tr><td>Secretaria</td><td><code>10.20.0.0/24</code></td><td><code>10.20.0.1</code></td><td>SRV-SEC-ADMIN (<code>10.20.0.10</code>)</td></tr>
+            <tr><td>UPA 1</td><td><code>10.30.0.0/24</code></td><td><code>10.30.0.1</code></td><td>SRV-UPA1-LOCAL (<code>10.30.0.10</code>)</td></tr>
+            <tr><td>UPA 2</td><td><code>10.40.0.0/24</code></td><td><code>10.40.0.1</code></td><td>SRV-UPA2-LOCAL (<code>10.40.0.10</code>)</td></tr>
+            <tr><td>UPA 3</td><td><code>10.50.0.0/24</code></td><td><code>10.50.0.1</code></td><td>SRV-UPA3-LOCAL (<code>10.50.0.10</code>)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout">
+        <strong>NAT (Network Address Translation):</strong> Implementado nos roteadores de borda para mascarar as redes internas e permitir a saída WAN via IPs públicos simulados, protegendo a integridade da rede hospitalar.
+      </div>
+
+      <h3>Justificativa de Recursos</h3>
+      <h4>Inventário de Equipamentos</h4>
+      <p>O inventário foi organizado para equilibrar custo-benefício e robustez. Na Matriz, optamos por <strong>Switches Cisco Catalyst 9200L</strong> pela capacidade de empilhamento e <strong>Firewalls FortiGate</strong> para segurança NGFW. O uso de nobreaks senoidais da APC garante que os sistemas de prontuário não sofram quedas por oscilações elétricas.</p>
+
+      <h4>Cálculo de Links e Tráfego</h4>
+      <p>Conforme a planilha de cálculos, a Matriz possui um link de <strong>152 Mbps</strong>, dimensionado para suportar o tráfego de videoconsultas e sincronização de banco de dados das filiais, que operam com links de <strong>42,4 Mbps</strong> cada.</p>
+
+      <h3>Plano de Testes e Validação</h3>
+      <p>Para validar o funcionamento, foram estabelecidos os seguintes testes no protótipo:</p>
+      <ol>
+        <li><strong>Teste de Conectividade Interna:</strong> Pings entre PCs da mesma sub-rede.</li>
+        <li><strong>Teste de Conectividade WAN:</strong> Pings entre a UPA 3 e o SRV-BH-PRONTUARIO.</li>
+        <li><strong>Validação de Nomenclatura:</strong> Conferência de que todos os dispositivos seguem o padrão <em>Unidade-Setor-ID</em>.</li>
+      </ol>
+
+      <h3>Conclusão da Etapa 1</h3>
+      <p>A Etapa 1 conclui-se com um protótipo funcional e uma documentação que justifica cada ativo escolhido. O projeto está pronto para a próxima fase, garantindo que a infraestrutura física e lógica atenda às demandas críticas da Rede Hospitalar Cuidar.</p>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ ETAPA 2 -->
+  <section id="etapa2" class="card">
+    <div class="card-header">
+      <span class="badge">ETAPA 2</span>
+      <h2>Preparação do Ambiente em Nuvem e Virtualização Local</h2>
+    </div>
+    <div class="card-body">
+
+      <h3>Introdução</h3>
+      <p>A Etapa 2 é marcada pelo mapeamento e implantação dos servidores em nuvem e <em>on-premise</em> para o devido atendimento do planejamento inicial. Nesta etapa, adaptações e definições de escopo foram realizadas para garantir a conformidade com o planejamento estabelecido na Etapa 1, bem como para atender às eventuais necessidades identificadas na fase anterior.</p>
+
+      <h3>Gestão e Organização da Etapa</h3>
+      <h4>Responsabilidades e Colaboração</h4>
+      <p>Para a execução da Etapa 2, as responsabilidades foram distribuídas entre os membros do grupo de forma a aproveitar as competências individuais e garantir a entrega dentro do prazo estabelecido.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Integrantes</th><th>Responsabilidade</th></tr></thead>
+          <tbody>
+            <tr><td>Igor e Pedro</td><td>Configuração das instâncias EC2 na AWS e definição da arquitetura da VPC <code>rede-cuidar-vpc</code></td></tr>
+            <tr><td>Henrique</td><td>Configuração do servidor Ubuntu no Oracle VirtualBox, incluindo definição de IP estático via <code>netplan</code> e integração com a rede local</td></tr>
+            <tr><td>Bernardo e Athos</td><td>Instalação e validação dos serviços no servidor Ubuntu (Apache2, MySQL, BIND9, DHCP e VSFTPD), além do acompanhamento de custos da instância AWS</td></tr>
+            <tr><td>Fabrício</td><td>Configuração do Active Directory, criação das Unidades Organizacionais, vinculação de GPO e redação técnica do documento</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Ambiente em Nuvem — Amazon Web Services (AWS)</h3>
+
+      <h4>Escolha da Plataforma</h4>
+      <p>O grupo optou pela utilização do <strong>Amazon EC2</strong> (Elastic Compute Cloud) como plataforma de nuvem, por ser um dos principais <em>players</em> de mercado, oferecendo alta disponibilidade, escalabilidade e um vasto ecossistema de serviços gerenciados adequados à infraestrutura hospitalar da Rede Cuidar.</p>
+
+      <h4>Instâncias Configuradas</h4>
+      <p>As instâncias foram criadas conforme o mapeamento de servidores definido na Etapa 1. O <strong>Windows Server</strong> foi implantado via instância EC2 para atuar como servidor de aplicação para publicação do back-end hospitalar.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Campo</th><th>Informação</th></tr></thead>
+          <tbody>
+            <tr><td>Nome da Instância</td><td>Rede Cuidar</td></tr>
+            <tr><td>ID da Instância</td><td><code>i-03c0d9df7ad6e2f96</code></td></tr>
+            <tr><td>Tipo de Instância</td><td><code>t2.large</code></td></tr>
+            <tr><td>Sistema Operacional</td><td>Windows Server 2016 Datacenter</td></tr>
+            <tr><td>IP Público</td><td><code>54.80.166.57</code></td></tr>
+            <tr><td>IP Privado</td><td><code>10.0.1.84</code></td></tr>
+            <tr><td>Usuário de Acesso</td><td>Administrator</td></tr>
+            <tr><td>Método de Acesso</td><td>RDP (Área de Trabalho Remota)</td></tr>
+            <tr><td>Região</td><td>us-east-1 (Norte da Virgínia)</td></tr>
+            <tr><td>VPC</td><td><code>rede-cuidar-vpc</code> (<code>10.0.0.0/16</code>)</td></tr>
+            <tr><td>Status</td><td><span class="status-ok"><span class="dot"></span> Executando</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Configuração de Segurança — Acesso Criptografado</h4>
+      <p>O acesso às instâncias é realizado por meio de <strong>SSH com autenticação por par de chaves pública/privada</strong>, garantindo comunicação totalmente criptografada entre os administradores e os servidores em nuvem. Essa abordagem assegura que nenhum acesso não autorizado seja possível sem a chave privada correspondente.</p>
+
+      <h3>Virtualização Local — Oracle VirtualBox</h3>
+
+      <h4>Configuração do Servidor On-Premise</h4>
+      <p>Para o mapeamento dos serviços <em>on-premise</em>, foi utilizado o <strong>Oracle VirtualBox</strong> como plataforma de virtualização. O servidor local foi configurado com o sistema operacional <strong>Ubuntu Server</strong>, representando o servidor <code>SRV-BH-PRONTUARIO</code> da Matriz.</p>
+
+      <h4>Configuração de Rede — IP Estático</h4>
+      <p>O servidor virtual foi configurado com <strong>endereço IP estático</strong> via <code>netplan</code>, aplicado no arquivo <code>/etc/netplan/50-cloud-init.yaml</code>:</p>
+      <ul>
+        <li><strong>Interface:</strong> <code>enp0s3</code></li>
+        <li><strong>Endereço IP:</strong> <code>192.168.18.75/24</code></li>
+        <li><strong>Gateway:</strong> <code>192.168.18.1</code></li>
+        <li><strong>DNS primário:</strong> <code>8.8.8.8</code> (Google DNS)</li>
+        <li><strong>DNS secundário:</strong> <code>8.8.4.4</code> (Google DNS)</li>
+        <li><strong>DHCP4:</strong> Desabilitado</li>
+      </ul>
+<pre><code>network:
+  version: 2
+  ethernets:
+    enp0s3:
+      dhcp4: false
+      addresses:
+        - 192.168.18.75/24
+      routes:
+        - to: default
+          via: 192.168.18.1
+      nameservers:
+        addresses:
+          - 8.8.8.8
+          - 8.8.4.4</code></pre>
+
+      <h4>Serviços Instalados</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Serviço</th><th>Função</th><th>Porta</th></tr></thead>
+          <tbody>
+            <tr><td><strong>SSH</strong></td><td>Acesso remoto seguro e criptografado ao servidor</td><td><code>22</code></td></tr>
+            <tr><td><strong>Apache2</strong></td><td>Servidor Web para publicação de aplicações</td><td><code>80/443</code></td></tr>
+            <tr><td><strong>MySQL</strong></td><td>Banco de dados relacional para prontuários eletrônicos</td><td><code>3306</code></td></tr>
+            <tr><td><strong>BIND9/named</strong></td><td>Servidor DNS para resolução de nomes da rede interna</td><td><code>53</code></td></tr>
+            <tr><td><strong>DHCP</strong></td><td>Distribuição automática de endereços IP na rede local</td><td><code>67</code></td></tr>
+            <tr><td><strong>VSFTPD</strong></td><td>Servidor FTP para transferência segura de arquivos</td><td><code>21</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Evidências de Funcionamento</h3>
+      <div class="figure-grid">
+        <figure>
+          <img src="Eixo_5/print_ip_estatico.png" alt="IP estático no Ubuntu" loading="lazy" />
+          <figcaption>Servidor Ubuntu On-Premise com IP estático configurado (192.168.18.75/24)</figcaption>
+        </figure>
+        <figure>
+          <img src="Eixo_5/print_servicos.png" alt="Serviços ativos no Ubuntu" loading="lazy" />
+          <figcaption>Serviços instalados e ativos no servidor Ubuntu On-Premise</figcaption>
+        </figure>
+        <figure>
+          <img src="Eixo_5/print_instancia.png" alt="Instância AWS EC2" loading="lazy" />
+          <figcaption>Instância EC2 "Rede Cuidar" em execução no painel da AWS</figcaption>
+        </figure>
+        <figure>
+          <img src="Eixo_5/windows_server.png" alt="Windows Server AWS" loading="lazy" />
+          <figcaption>Windows Server 2016 Datacenter em execução na instância AWS</figcaption>
+        </figure>
+        <figure>
+          <img src="Eixo_5/print_vpc.png" alt="VPC AWS" loading="lazy" />
+          <figcaption>VPC <code>rede-cuidar-vpc</code> configurada na AWS com CIDR <code>10.0.0.0/16</code></figcaption>
+        </figure>
+        <figure>
+          <img src="Eixo_5/ad_print.png" alt="Active Directory" loading="lazy" />
+          <figcaption>Central Administrativa do Active Directory — domínio <code>minasgerais.net</code></figcaption>
+        </figure>
+        <figure>
+          <img src="Eixo_5/subredes_print.png" alt="OUs Active Directory" loading="lazy" />
+          <figcaption>OUs criadas no AD: <code>minas</code> com sub-OUs <code>belohorizonte</code>, <code>betim</code> e <code>contagem</code></figcaption>
+        </figure>
+        <figure>
+          <img src="Eixo_5/gpo_criada.png" alt="GPO criada" loading="lazy" />
+          <figcaption>GPO <code>pgbh</code> vinculada à OU <code>usuarios</code> em <code>belohorizonte</code></figcaption>
+        </figure>
+      </div>
+
+      <h3>Vídeo Demonstrativo</h3>
+      <p>O vídeo demonstrativo da Etapa 2, exibindo o funcionamento dos ambientes configurados, está disponível no Microsoft Teams:</p>
+      <a class="video-link" href="https://sgapucminasbr.sharepoint.com/sites/team_sga_2414_2026_1_7378102/_layouts/15/guestaccess.aspx?share=IQBUD9anyHlnSZGWIaAY6TzEAaYO6do7X8C4R6jARODEzeA&e=qDsxRR" target="_blank" rel="noopener noreferrer">
+        ▶&nbsp; Assistir vídeo demonstrativo
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ ETAPA 3 -->
+  <section id="etapa3" class="card">
+    <div class="card-header">
+      <span class="badge">ETAPA 3</span>
+      <h2>Monitoramento Ativo da Infraestrutura de Servidores</h2>
+    </div>
+    <div class="card-body">
+
+      <h3>Introdução ao Monitoramento Centralizado</h3>
+      <p>Para garantir os critérios de alta disponibilidade, integridade, identificação proativa de gargalos e comunicação ininterrupta exigidos pela <strong>Rede Hospitalar Cuidar</strong>, foi consolidada uma solução de monitoramento de ativos utilizando a ferramenta corporativa <strong>Zabbix</strong>.</p>
+      <p>Nesta etapa, a infraestrutura foi integrada de ponta a ponta, permitindo a coleta de dados de desempenho em tempo real por meio de agentes dedicados e protocolos de rede. A telemetria abrange o consumo de hardware (processamento, memória, E/S de disco) e volumetria de tráfego de dados, fornecendo visibilidade total sobre o ecossistema local e em nuvem.</p>
+
+      <h3>Gestão e Organização da Etapa</h3>
+      <h4>Responsabilidades e Colaboração</h4>
+      <p>As atividades da Etapa 3 foram distribuídas entre os membros do grupo conforme as competências demonstradas nas etapas anteriores, garantindo continuidade e coesão na execução do projeto.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Integrantes</th><th>Responsabilidade</th></tr></thead>
+          <tbody>
+            <tr><td>Igor e Pedro</td><td>Instalação e configuração do Zabbix Appliance como plataforma central de monitoramento, incluindo definição de IP estático e acesso à interface web</td></tr>
+            <tr><td>Henrique</td><td>Configuração do protocolo SNMP nos servidores Ubuntu e Windows, correção das permissões de acesso no <code>snmpd.conf</code> e cadastro dos hosts no Zabbix</td></tr>
+            <tr><td>Bernardo e Athos</td><td>Criação do mapa de rede <em>Rede Hospitalar Cuidar</em> e configuração do dashboard personalizado com widgets de métricas e alertas</td></tr>
+            <tr><td>Fabrício</td><td>Análise e interpretação dos dados coletados pelo Zabbix, documentação dos resultados e redação técnica do capítulo</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Topologia Lógica e Visões de Gerência</h3>
+
+      <h4>Mapa de Conectividade da Infraestrutura</h4>
+      <p>O mapa de topologia estruturado no painel nativo do Zabbix (<em>All maps / Rede Hospitalar Cuidar</em>) ilustra as relações de conectividade e o fluxo saudável de comunicação entre os nós de gerência.</p>
+      <div class="figure-full">
+        <figure>
+          <img src="Eixo_5/print_mapa.png" alt="Mapa Zabbix" loading="lazy" />
+          <figcaption>Mapa de monitoramento integrado da infraestrutura local e nuvem no Zabbix</figcaption>
+        </figure>
+      </div>
+
+      <h4>Painel Global de Operações (Dashboard)</h4>
+      <p>O monitoramento centralizado conta com um painel de controle principal (<em>Dashboard</em>), que agrega os principais indicadores de desempenho do ecossistema hospitalar, facilitando a tomada de decisão em nível de suporte de infraestrutura.</p>
+      <div class="figure-full">
+        <figure>
+          <img src="Eixo_5/dashboard_print.png" alt="Dashboard Zabbix" loading="lazy" />
+          <figcaption>Dashboard geral do Zabbix exibindo a saúde integrada do ambiente hospitalar</figcaption>
+        </figure>
+      </div>
+
+      <h4>Inventário de Hosts e Status de Disponibilidade</h4>
+      <p>Todos os hosts monitorados foram devidamente parametrizados e encontram-se operando sem a presença de problemas ou alertas ativos. A integração com o agente Zabbix garante a confiabilidade dos status apresentados.</p>
+      <div class="figure-full">
+        <figure>
+          <img src="Eixo_5/hosts_verdes.png" alt="Hosts operacionais" loading="lazy" />
+          <figcaption>Listagem de hosts ativos e com status operacional estabilizado</figcaption>
+        </figure>
+      </div>
+
+      <h3>Métricas de Performance — Servidor Local (srv-bh-prontuario)</h3>
+      <p>O servidor local virtualizado, responsável pelo banco de dados de prontuários eletrônicos e serviços internos da Matriz em Belo Horizonte, teve seu comportamento monitorado pelos gráficos abaixo.</p>
+
+      <div class="figure-grid">
+        <figure>
+          <img src="Eixo_5/cpu_utilization_ubuntu.png" alt="CPU Ubuntu" loading="lazy" />
+          <figcaption>Métricas de uso de processador (CPU) no servidor Ubuntu local</figcaption>
+        </figure>
+        <figure>
+          <img src="Eixo_5/memory_utilization_ubuntu.png" alt="Memória Ubuntu" loading="lazy" />
+          <figcaption>Análise de alocação e consumo de memória RAM do servidor local</figcaption>
+        </figure>
+        <figure>
+          <img src="Eixo_5/disco_readwirte_ubuntu.png" alt="Disco Ubuntu" loading="lazy" />
+          <figcaption>Estatísticas de leitura e escrita em disco do servidor de banco de dados</figcaption>
+        </figure>
+        <figure>
+          <img src="Eixo_5/network_traffic_ubuntu.png" alt="Rede Ubuntu" loading="lazy" />
+          <figcaption>Volume e taxa de transferência de pacotes na interface de rede local (<code>enp0s3</code>)</figcaption>
+        </figure>
+      </div>
+
+      <h3>Métricas de Performance — Servidor em Nuvem (srv-aws-cuidar)</h3>
+      <p>A instância EC2 alocada na região Norte da Virgínia (<code>us-east-1</code>), que atua como controlador de domínio Active Directory e hospedagem do back-end hospitalar, teve suas métricas consolidadas abaixo.</p>
+
+      <div class="figure-grid">
+        <figure>
+          <img src="Eixo_5/cpu_utilization_aws.png" alt="CPU AWS" loading="lazy" />
+          <figcaption>Métricas de processamento da instância EC2 Windows Server na AWS</figcaption>
+        </figure>
+        <figure>
+          <img src="Eixo_5/memory_utilization_aws.png" alt="Memória AWS" loading="lazy" />
+          <figcaption>Gráfico de uso de memória física na instância de aplicação em nuvem</figcaption>
+        </figure>
+        <figure>
+          <img src="Eixo_5/rede_utilization_aws.png" alt="Rede AWS" loading="lazy" />
+          <figcaption>Análise de pacotes enviados e recebidos através da interface WAN da AWS</figcaption>
+        </figure>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ ETAPAS 4 e 5 -->
+  <section id="etapa4" class="card">
+    <div class="card-header">
+      <span class="badge">ETAPA 4</span>
+      <h2>A Definir</h2>
+    </div>
+    <div class="card-body">
+      <div class="callout pending">Este capítulo será preenchido na entrega da Etapa 4.</div>
+    </div>
+  </section>
+
+  <section id="etapa5" class="card">
+    <div class="card-header">
+      <span class="badge">ETAPA 5</span>
+      <h2>A Definir</h2>
+    </div>
+    <div class="card-body">
+      <div class="callout pending">Este capítulo será preenchido na entrega da Etapa 5.</div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══════════════════════════════════════════════════════ FOOTER -->
+<footer>
+  <p>
+    <strong>Pontifícia Universidade Católica de Minas Gerais</strong><br/>
+    Sistemas de Informação &nbsp;·&nbsp; Projeto de Infraestrutura &nbsp;·&nbsp; Eixo 5 &nbsp;·&nbsp; 2026
+  </p>
+</footer>
+
+</body>
+</html>
