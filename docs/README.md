@@ -84,6 +84,19 @@ A Etapa 1 conclui-se com um protótipo funcional e uma documentação que justif
 
 A Etapa 2 é marcada pelo mapeamento e implantação dos servidores em nuvem e *on-premise* para o devido atendimento do planejamento inicial. Nesta etapa, adaptações e definições de escopo foram realizadas para garantir a conformidade com o planejamento estabelecido na Etapa 1, bem como para atender às eventuais necessidades identificadas na fase anterior.
 
+### Gestão e Organização da Etapa
+
+#### Responsabilidades e Colaboração
+
+Para a execução da Etapa 2, as responsabilidades foram distribuídas entre os membros do grupo de forma a aproveitar as competências individuais e garantir a entrega dentro do prazo estabelecido.
+
+| Integrantes | Responsabilidade |
+|---|---|
+| Igor e Pedro | Configuração das instâncias EC2 na AWS e definição da arquitetura da VPC `rede-cuidar-vpc` |
+| Henrique | Configuração do servidor Ubuntu no Oracle VirtualBox, incluindo definição de IP estático via `netplan` e integração com a rede local |
+| Bernardo e Athos | Instalação e validação dos serviços no servidor Ubuntu (Apache2, MySQL, BIND9, DHCP e VSFTPD), além do acompanhamento de custos da instância AWS |
+| Fabrício | Configuração do Active Directory, criação das Unidades Organizacionais, vinculação de GPO e redação técnica do documento |
+
 ### Ambiente em Nuvem — Amazon Web Services (AWS)
 
 #### Escolha da Plataforma
@@ -210,6 +223,19 @@ O vídeo demonstrativo da Etapa 2, exibindo o funcionamento dos ambientes config
 Para garantir os critérios de alta disponibilidade, integridade, identificação proativa de gargalos e comunicação ininterrupta exigidos pela **Rede Hospitalar Cuidar**, foi consolidada uma solução de monitoramento de ativos utilizando a ferramenta corporativa **Zabbix**.
 
 Nesta etapa, a infraestrutura foi integrada de ponta a ponta, permitindo a coleta de dados de desempenho em tempo real por meio de agentes dedicados e protocolos de rede. A telemetria abrange o consumo de hardware (processamento, memória, E/S de disco) e volumetria de tráfego de dados, fornecendo visibilidade total sobre o ecossistema local e em nuvem.
+
+### Gestão e Organização da Etapa
+
+#### Responsabilidades e Colaboração
+
+As atividades da Etapa 3 foram distribuídas entre os membros do grupo conforme as competências demonstradas nas etapas anteriores, garantindo continuidade e coesão na execução do projeto.
+
+| Integrantes | Responsabilidade |
+|---|---|
+| Igor e Pedro | Instalação e configuração do Zabbix Appliance como plataforma central de monitoramento, incluindo definição de IP estático e acesso à interface web |
+| Henrique | Configuração do protocolo SNMP nos servidores Ubuntu e Windows, correção das permissões de acesso no `snmpd.conf` e cadastro dos hosts no Zabbix |
+| Bernardo e Athos | Criação do mapa de rede *Rede Hospitalar Cuidar* e configuração do dashboard personalizado com widgets de métricas e alertas |
+| Fabrício | Análise e interpretação dos dados coletados pelo Zabbix, documentação dos resultados e redação técnica do capítulo |
 
 ### Topologia Lógica e Visões de Gerência
 
