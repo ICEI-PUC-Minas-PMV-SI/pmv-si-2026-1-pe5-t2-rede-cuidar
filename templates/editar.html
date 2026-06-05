@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card">
+  <div class="card-header">
+    <h1>Editar Paciente</h1>
+    <a href="/" class="btn btn-ghost">← Voltar</a>
+  </div>
+
+  <form method="POST" action="/editar/{{ paciente.id }}">
+    <div class="form-group">
+      <label for="nome">Nome Completo</label>
+      <input type="text" id="nome" name="nome" value="{{ paciente.nome }}" required>
+    </div>
+    <div class="form-group">
+      <label for="cpf">CPF</label>
+      <input type="text" id="cpf" name="cpf" value="{{ paciente.cpf }}" maxlength="14" required>
+    </div>
+    <div class="form-group">
+      <label for="nascimento">Data de Nascimento</label>
+      <input type="date" id="nascimento" name="nascimento"
+             value="{{ paciente.data_nascimento.strftime('%Y-%m-%d') if paciente.data_nascimento else '' }}" required>
+    </div>
+    <div class="form-group">
+      <label for="unidade">Unidade de Atendimento</label>
+      <select id="unidade" name="unidade" required>
+        <option value="" disabled>Selecione a unidade</option>
+        {% for u in ['Matriz - BH', 'Secretaria', 'UPA 1', 'UPA 2', 'UPA 3'] %}
+          <option value="{{ u }}" {% if paciente.unidade == u %}selected{% endif %}>{{ u }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">✔ Salvar Alterações</button>
+      <a href="/" class="btn btn-ghost">Cancelar</a>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

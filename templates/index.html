@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card">
+  <div class="card-header">
+    <h1>Pacientes Cadastrados</h1>
+    <a href="/cadastrar" class="btn btn-primary">＋ Novo Paciente</a>
+  </div>
+
+  <div class="table-wrap">
+    {% if pacientes %}
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>Nascimento</th>
+          <th>Unidade</th>
+          <th>Cadastrado em</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in pacientes %}
+        <tr>
+          <td>{{ p.id }}</td>
+          <td><strong>{{ p.nome }}</strong></td>
+          <td>{{ p.cpf }}</td>
+          <td>{{ p.data_nascimento.strftime('%d/%m/%Y') if p.data_nascimento else '—' }}</td>
+          <td><span class="unidade-badge">{{ p.unidade }}</span></td>
+          <td>{{ p.criado_em.strftime('%d/%m/%Y %H:%M') if p.criado_em else '—' }}</td>
+          <td>
+            <a href="/editar/{{ p.id }}" class="btn btn-warning" style="padding:6px 12px;font-size:0.8rem;">✏ Editar</a>
+            <form action="/deletar/{{ p.id }}" method="POST" style="display:inline;"
+                  onsubmit="return confirm('Confirmar remoção de {{ p.nome }}?')">
+              <button type="submit" class="btn btn-danger" style="padding:6px 12px;font-size:0.8rem;">✕ Remover</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="empty-state">
+      <div style="font-size:2.5rem;">🏥</div>
+      <p>Nenhum paciente cadastrado ainda.</p>
+      <a href="/cadastrar" class="btn btn-primary" style="margin-top:1rem;">Cadastrar primeiro paciente</a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
