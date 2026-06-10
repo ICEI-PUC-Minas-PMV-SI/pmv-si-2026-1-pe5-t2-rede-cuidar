@@ -2,7 +2,11 @@
 CREATE DATABASE IF NOT EXISTS hospital_cuidar CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE USER IF NOT EXISTS 'cuidar_user'@'localhost' IDENTIFIED BY 'cuidar_pass';
+CREATE USER IF NOT EXISTS 'cuidar_user'@'192.168.18.75' IDENTIFIED BY 'cuidar_pass';
+CREATE USER IF NOT EXISTS 'cuidar_user'@'%' IDENTIFIED BY 'cuidar_pass';
 GRANT ALL PRIVILEGES ON hospital_cuidar.* TO 'cuidar_user'@'localhost';
+GRANT ALL PRIVILEGES ON hospital_cuidar.* TO 'cuidar_user'@'192.168.18.75';
+GRANT ALL PRIVILEGES ON hospital_cuidar.* TO 'cuidar_user'@'%';
 FLUSH PRIVILEGES;
 
 USE hospital_cuidar;
