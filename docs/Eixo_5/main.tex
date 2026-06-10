@@ -436,12 +436,67 @@ Os dados exibem o tráfego que cruza a placa de rede virtual conectada à VPC. A
 % ============================================================
 % ETAPA 4
 % ============================================================
-\chapter{Etapa 4 --- [Título a Definir]}
+\chapter{Etapa 4 --- CRUD --- Cadastro de Pacientes}
 
+\section{Introdução}
+A Etapa 4 consiste no desenvolvimento de um sistema \textbf{CRUD} (Create, Read, Update, Delete) para cadastro de pacientes da Rede Hospitalar Cuidar. A aplicação foi construída em \textbf{Python com Flask} e banco de dados \textbf{MySQL}, permitindo o gerenciamento completo dos registros de pacientes.
+
+\section{Funcionalidades Implementadas}
+\begin{itemize}
+    \item \textbf{Listar} todos os pacientes cadastrados.
+    \item \textbf{Cadastrar} novo paciente (nome, CPF, nascimento, unidade).
+    \item \textbf{Editar} registro existente.
+    \item \textbf{Remover} paciente com confirmação.
+\end{itemize}
+
+\section{Unidades de Atendimento}
+O sistema contempla as cinco unidades da rede: Matriz — BH, Secretaria, UPA 1, UPA 2 e UPA 3.
+
+\section{Tecnologias Utilizadas}
 \begin{center}
-    \vspace{2cm}
-    \textit{Este capítulo será preenchido na entrega da Etapa 4.}
-    \vspace{2cm}
+\small
+\begin{tabular}{ll}
+\toprule
+\textbf{Componente} & \textbf{Tecnologia} \\ \midrule
+Back-end    & Flask 3.0 (Python) \\
+Banco de Dados & MySQL 8.0 \\
+Conector    & mysql-connector-python \\
+Front-end   & HTML5 + CSS3 (Jinja2) \\
+Servidor    & Ubuntu Server (192.168.18.75) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Estrutura do Projeto}
+\begin{verbatim}
+crud-cuidar/
+├── app.py               # Rotas CRUD (Flask)
+├── setup_db.sql         # Script de criação do banco
+├── requirements.txt     # Dependências Python
+└── templates/
+    ├── base.html        # Layout base
+    ├── index.html       # Listagem de pacientes
+    ├── cadastrar.html   # Formulário de cadastro
+    └── editar.html      # Formulário de edição
+\end{verbatim}
+
+\section{Implantação}
+A aplicação foi implantada no servidor Ubuntu local da Matriz (\texttt{192.168.18.75}), acessível via navegador na porta \texttt{5000}. O banco de dados \texttt{hospital\_cuidar} roda no mesmo servidor, garantindo baixa latência nas operações.
+
+\subsection{Tabela do Banco de Dados}
+\begin{center}
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Campo} & \textbf{Tipo} & \textbf{Descrição} \\ \midrule
+id             & INT (PK, AUTO\_INCREMENT) & Identificador único \\
+nome           & VARCHAR(150) & Nome completo do paciente \\
+cpf            & VARCHAR(14)  & CPF do paciente \\
+data\_nascimento & DATE        & Data de nascimento \\
+unidade        & VARCHAR(50)  & Unidade de atendimento \\
+criado\_em     & TIMESTAMP    & Data de cadastro \\
+\bottomrule
+\end{tabular}
 \end{center}
 
 % ============================================================

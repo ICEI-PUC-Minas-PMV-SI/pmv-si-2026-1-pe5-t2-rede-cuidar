@@ -309,9 +309,57 @@ Os dados exibem o tráfego que cruza a placa de rede virtual conectada à VPC. A
 
 ---
 
-## Etapa 4 — A Definir
+## Etapa 4 — CRUD — Cadastro de Pacientes
 
-> Este capítulo será preenchido na entrega da Etapa 4.
+### Introdução
+
+A Etapa 4 consiste no desenvolvimento de um sistema **CRUD** (Create, Read,
+Update, Delete) para cadastro de pacientes da Rede Hospitalar Cuidar. A
+aplicação foi construída em **Python com Flask** e banco de dados **MySQL**,
+permitindo o gerenciamento completo dos registros de pacientes.
+
+### Funcionalidades Implementadas
+
+- **Listar** todos os pacientes cadastrados
+- **Cadastrar** novo paciente (nome, CPF, nascimento, unidade)
+- **Editar** registro existente
+- **Remover** paciente com confirmação
+
+### Unidades de Atendimento
+
+O sistema contempla as cinco unidades da rede: Matriz — BH, Secretaria,
+UPA 1, UPA 2 e UPA 3.
+
+### Tecnologias Utilizadas
+
+| Componente | Tecnologia |
+| --- | --- |
+| Back-end | Flask 3.0 (Python) |
+| Banco de Dados | MySQL 8.0 |
+| Conector | mysql-connector-python |
+| Front-end | HTML5 + CSS3 (Jinja2) |
+| Servidor | Ubuntu Server (192.168.18.75) |
+
+### Estrutura do Projeto
+
+```
+crud-cuidar/
+├── app.py               # Rotas CRUD (Flask)
+├── setup_db.sql         # Script de criação do banco
+├── requirements.txt     # Dependências Python
+└── templates/
+    ├── base.html        # Layout base
+    ├── index.html       # Listagem de pacientes
+    ├── cadastrar.html   # Formulário de cadastro
+    └── editar.html      # Formulário de edição
+```
+
+### Implantação
+
+A aplicação foi implantada no servidor Ubuntu local da Matriz
+(`192.168.18.75`), acessível via navegador na porta `5000`. O banco de
+dados `hospital_cuidar` roda no mesmo servidor, garantindo baixa latência
+nas operações.
 
 ---
 
