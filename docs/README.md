@@ -5,7 +5,7 @@
 - [Etapa 1 — Planejamento e Prototipação](#etapa-1--planejamento-e-prototipação)
 - [Etapa 2 — Preparação do Ambiente em Nuvem e Virtualização Local](#etapa-2--preparação-do-ambiente-em-nuvem-e-virtualização-local)
 - [Etapa 3 — Monitoramento Ativo da Infraestrutura de Servidores](#etapa-3--monitoramento-ativo-da-infraestrutura-de-servidores)
-- [Etapa 4 — A Definir](#etapa-4--a-definir)
+- [Etapa 4 — CRUD — Cadastro de Pacientes](#etapa-4--crud--cadastro-de-pacientes)
 - [Etapa 5 — A Definir](#etapa-5--a-definir)
 
 ---
