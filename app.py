@@ -1,15 +1,16 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for, flash
 import mysql.connector
 from mysql.connector import Error
 
 app = Flask(__name__)
-app.secret_key = 'cuidar_secret_key_2026'
+app.secret_key = os.environ.get('SECRET_KEY', 'cuidar_secret_key_2026')
 
 DB_CONFIG = {
-    'host': '192.168.18.75',
-    'user': 'cuidar_user',
-    'password': 'cuidar_pass',
-    'database': 'hospital_cuidar'
+    'host': os.environ.get('DB_HOST', '192.168.18.75'),
+    'user': os.environ.get('DB_USER', 'cuidar_user'),
+    'password': os.environ.get('DB_PASSWORD', 'cuidar_pass'),
+    'database': os.environ.get('DB_NAME', 'hospital_cuidar')
 }
 
 def get_connection():
