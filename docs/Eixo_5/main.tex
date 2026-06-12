@@ -515,8 +515,22 @@ criado\_em     & TIMESTAMP    & Data de cadastro \\
 % ============================================================
 \chapter*{Documentos}
 
-O documento oficial completo do Projeto de Sistemas de Informação está
+O documento \textbf{Política de Segurança da Informação (PSI) --- v1.0 (Junho/2026)} está
 disponível no arquivo \texttt{PSI\_Rede\_Hospitalar\_Cuidar\_OFICIAL\_v10\_260612\_152738.pdf},
-na pasta \texttt{docs/} do repositório.
+na pasta \texttt{docs/} do repositório. O documento formaliza as diretrizes, responsabilidades e
+controles para proteção dos ativos de informação da Rede Hospitalar Cuidar, em conformidade com
+a LGPD, ISO/IEC~27001 e Resolução CFM~nº~1.821/2007.
+
+A PSI abrange os seguintes domínios:
+
+\begin{itemize}
+    \item \textbf{Tríade da segurança}: confidencialidade, integridade e disponibilidade
+    \item \textbf{Gerenciamento de acesso}: Active Directory, senhas 12+ caracteres, MFA, RBAC
+    \item \textbf{Segurança de redes}: segmentação /24 por unidade, firewalls, monitoramento Zabbix
+    \item \textbf{Resposta a incidentes}: 30 minutos para incidentes de alta severidade
+    \item \textbf{Conformidade legal}: LGPD, Marco Civil, ISO~27001, CFM
+    \item \textbf{Gestão de vulnerabilidades}: patches críticos em até 72h
+    \item \textbf{Responsabilidades}: direção, equipe de TI e todos os colaboradores
+\end{itemize}
 
 \end{document}

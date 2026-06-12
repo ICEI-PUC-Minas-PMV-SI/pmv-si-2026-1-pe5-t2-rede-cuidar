@@ -34,11 +34,9 @@ local e em nuvem.
 
 - Professor Alexandre Teixeira
 
-# CRUD — Rede Hospitalar Cuidar
+## CRUD — Rede Hospitalar Cuidar
 
 Aplicação back-end Flask com MySQL para cadastro de pacientes.
-
----
 
 ## Pré-requisitos (sua máquina local)
 
@@ -130,7 +128,7 @@ Acesse pelo navegador: <http://192.168.18.75:5000>
 
 ## Estrutura do projeto
 
-```
+```html
 crud-cuidar/
 ├── app.py               # Aplicação principal Flask (rotas CRUD)
 ├── setup_db.sql         # Script de criação do banco e tabela

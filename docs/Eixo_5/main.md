@@ -499,5 +499,5 @@ nas operações.
 
 ## Documentos
 
-- [📄 Documento Oficial PSI (PDF)](../PSI_Rede_Hospitalar_Cuidar_OFICIAL_v10_260612_152738.pdf)
-  — Versão completa do Projeto de Sistemas de Informação da Rede Hospitalar Cuidar.
+- [📄 Política de Segurança da Informação — PSI (PDF)](../PSI_Rede_Hospitalar_Cuidar_OFICIAL_v10_260612_152738.pdf)
+  — Política de Segurança da Informação v1.0 (Junho/2026). Documento formal que estabelece as diretrizes, responsabilidades e controles para proteção dos ativos de informação da Rede Hospitalar Cuidar, em conformidade com a LGPD, ISO/IEC 27001 e Resolução CFM nº 1.821/2007. Abrange: tríade da segurança (confidencialidade, integridade e disponibilidade), gerenciamento de acesso (Active Directory, senhas 12+ caracteres, MFA, RBAC), segurança de redes (segmentação /24 por unidade, firewalls, monitoramento Zabbix), resposta a incidentes (30 minutos para alta severidade), conformidade legal (LGPD, Marco Civil, ISO 27001, CFM), gestão de vulnerabilidades (patches críticos em até 72h) e responsabilidades de direção, equipe de TI e colaboradores.
