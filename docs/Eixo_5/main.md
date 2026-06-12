@@ -494,3 +494,10 @@ nas operações.
 # Etapa 5 — A Definir
 
 *Este capítulo será preenchido na entrega da Etapa 5.*
+
+---
+
+## Documentos
+
+- [📄 Documento Oficial PSI (PDF)](../PSI_Rede_Hospitalar_Cuidar_OFICIAL_v10_260612_152738.pdf)
+  — Versão completa do Projeto de Sistemas de Informação da Rede Hospitalar Cuidar.
