@@ -249,6 +249,21 @@
     .figure-full { margin: 1rem 0; }
     .figure-full img { border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow); }
 
+    /* ── Vulnerability cards ────────────────────────────── */
+    .vuln-card {
+      background: var(--accent-l);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+    }
+    .vuln-card h4 {
+      margin: 0 0 .4rem;
+      color: var(--accent);
+    }
+    .vuln-card p { margin: 0 0 .5rem; }
+    .vuln-card p:last-child { margin: 0; }
+
     /* ── Callout ────────────────────────────────────────── */
     .callout {
       border-left: 4px solid var(--accent);
@@ -333,8 +348,8 @@
     <li><a href="#etapa1">Etapa 1 &mdash; Planejamento</a></li>
     <li><a href="#etapa2">Etapa 2 &mdash; Ambiente</a></li>
     <li><a href="#etapa3">Etapa 3 &mdash; Monitoramento</a></li>
-    <li><a href="#etapa4">Etapa 4 &mdash; CRUD</a></li>
-    <li><a href="#etapa5">Etapa 5</a></li>
+    <li><a href="#etapa4">Etapa 4 &mdash; Segurança</a></li>
+    <li><a href="#etapa5">Etapa 5 &mdash; Apresentação</a></li>
     <li><a href="#documentos">Documentos</a></li>
   </ul>
 </nav>
@@ -706,30 +721,50 @@
   <section id="etapa4" class="card">
     <div class="card-header">
       <span class="badge">ETAPA 4</span>
-      <h2>CRUD — Cadastro de Pacientes</h2>
+      <h2>Segurança da Informação e Aplicação Back-End</h2>
     </div>
     <div class="card-body">
 
       <h3>Introdução</h3>
-      <p>A Etapa 4 consiste no desenvolvimento de um sistema <strong>CRUD</strong> (Create, Read, Update, Delete) para cadastro de pacientes da Rede Hospitalar Cuidar. A aplicação foi construída em <strong>Python com Flask</strong> e banco de dados <strong>MySQL</strong>, permitindo o gerenciamento completo dos registros de pacientes.</p>
+      <p>A Etapa 4 do projeto da Rede Hospitalar Cuidar teve como objetivo fortalecer os aspectos relacionados à segurança da informação da infraestrutura desenvolvida nas etapas anteriores. Além da elaboração da <strong>Política de Segurança da Informação (PSI)</strong>, foi desenvolvida uma aplicação web para gerenciamento de pacientes, bem como uma <strong>cartilha de conscientização</strong> voltada aos colaboradores da organização.</p>
+      <p>Adicionalmente, foram realizadas análises de vulnerabilidades do ambiente implantado, permitindo identificar riscos potenciais e propor mecanismos de mitigação alinhados às boas práticas recomendadas pelo <strong>OWASP Top 10</strong> e às exigências da <strong>Lei Geral de Proteção de Dados (LGPD)</strong>.</p>
 
-      <h3>Funcionalidades Implementadas</h3>
+      <h3>Política de Segurança da Informação</h3>
+      <p>Com o objetivo de estabelecer diretrizes formais para proteção dos ativos de informação da organização, foi elaborada a <strong>Política de Segurança da Informação (PSI)</strong> da Rede Hospitalar Cuidar. O documento foi desenvolvido com base nas recomendações da norma ABNT NBR ISO/IEC 27001 e contempla os princípios fundamentais de confidencialidade, integridade e disponibilidade das informações.</p>
       <ul>
-        <li><strong>Listar</strong> todos os pacientes cadastrados</li>
-        <li><strong>Cadastrar</strong> novo paciente (nome, CPF, nascimento, unidade)</li>
-        <li><strong>Editar</strong> registro existente</li>
-        <li><strong>Remover</strong> paciente com confirmação</li>
+        <li>Controle de acesso e autenticação</li>
+        <li>Segurança física e ambiental</li>
+        <li>Proteção das redes e comunicações</li>
+        <li>Gestão de incidentes de segurança</li>
+        <li>Programas de treinamento e conscientização</li>
+        <li>Avaliação contínua dos mecanismos de segurança</li>
+        <li>Conformidade com requisitos legais e regulatórios</li>
       </ul>
 
-      <h3>Unidades de Atendimento</h3>
-      <p>O sistema contempla as cinco unidades da rede:</p>
+      <h3>Cartilha de Boas Práticas de Acesso Seguro</h3>
+      <p>Complementando a Política de Segurança da Informação, foi desenvolvida uma <strong>cartilha de boas práticas</strong> destinada aos colaboradores da Rede Hospitalar Cuidar. A cartilha foi elaborada em linguagem acessível, buscando conscientizar os usuários sobre os principais riscos de segurança presentes no ambiente corporativo.</p>
       <ul>
-        <li>Matriz — BH</li>
-        <li>Secretaria</li>
-        <li>UPA 1, UPA 2 e UPA 3</li>
+        <li>Criação e utilização segura de senhas</li>
+        <li>Identificação de tentativas de phishing</li>
+        <li>Engenharia social</li>
+        <li>Cuidados no tratamento dos dados dos pacientes</li>
+        <li>Procedimentos de reporte de incidentes</li>
+        <li>Recomendações para acesso remoto seguro</li>
       </ul>
 
-      <h3>Tecnologias Utilizadas</h3>
+      <h3>Aplicação Web para Gestão de Pacientes</h3>
+      <p>Como parte das entregas desta etapa, foi desenvolvida uma aplicação web para gerenciamento de pacientes da Rede Hospitalar Cuidar. A solução foi implementada utilizando o framework <strong>Flask</strong> em conjunto com o banco de dados <strong>MySQL</strong>, permitindo a realização das operações fundamentais de um sistema CRUD (<em>Create, Read, Update and Delete</em>).</p>
+
+      <h4>Funcionalidades Implementadas</h4>
+      <ul>
+        <li>Cadastro de pacientes</li>
+        <li>Consulta dos registros armazenados</li>
+        <li>Atualização das informações cadastradas</li>
+        <li>Exclusão de pacientes</li>
+        <li>Associação dos pacientes às unidades de atendimento da rede</li>
+      </ul>
+
+      <h4>Tecnologias Utilizadas</h4>
       <div class="table-wrap">
         <table>
           <thead><tr><th>Componente</th><th>Tecnologia</th></tr></thead>
@@ -743,7 +778,7 @@
         </table>
       </div>
 
-      <h3>Estrutura do Projeto</h3>
+      <h4>Estrutura do Projeto</h4>
       <pre><code>crud-cuidar/
 ├── app.py               # Rotas CRUD (Flask)
 ├── setup_db.sql         # Script de criação do banco
@@ -754,8 +789,68 @@
     ├── cadastrar.html   # Formulário de cadastro
     └── editar.html      # Formulário de edição</code></pre>
 
-      <h3>Implantação</h3>
-      <p>A aplicação foi implantada no servidor Ubuntu local da Matriz (<code>192.168.18.75</code>), acessível via navegador na porta <code>5000</code>. O banco de dados <code>hospital_cuidar</code> roda no mesmo servidor, garantindo baixa latência nas operações.</p>
+      <h4>Evidências da Aplicação</h4>
+      <div class="figure-grid">
+        <figure>
+          <img src="Eixo_5/tela_de_inicio.png" alt="Tela inicial" loading="lazy" />
+          <figcaption>Tela inicial da aplicação de gerenciamento de pacientes</figcaption>
+        </figure>
+        <figure>
+          <img src="Eixo_5/cadastro_de_pacientes.png" alt="Cadastro" loading="lazy" />
+          <figcaption>Formulário de cadastro de pacientes</figcaption>
+        </figure>
+        <figure>
+          <img src="Eixo_5/paciente_cadastrado.png" alt="Listagem" loading="lazy" />
+          <figcaption>Listagem dos pacientes cadastrados no sistema</figcaption>
+        </figure>
+        <figure>
+          <img src="Eixo_5/editar_paciente.png" alt="Edição" loading="lazy" />
+          <figcaption>Tela de edição dos dados de um paciente</figcaption>
+        </figure>
+      </div>
+
+      <h4>Implantação</h4>
+      <p>A aplicação foi disponibilizada tanto no ambiente local (servidor Ubuntu <code>192.168.18.75</code>, porta <code>5000</code>) quanto no ambiente em nuvem, permitindo validar a integração entre os serviços de infraestrutura implementados ao longo do projeto. O banco de dados <code>hospital_cuidar</code> roda no mesmo servidor, garantindo baixa latência nas operações.</p>
+
+      <h3>Análise de Vulnerabilidades</h3>
+      <p>Com base na infraestrutura implantada para hospedar a aplicação da Rede Hospitalar Cuidar, foram identificadas três vulnerabilidades classificadas segundo o <strong>OWASP Top 10 (2021)</strong>.</p>
+
+      <div class="vuln-card">
+        <h4>Injeção de SQL (SQL Injection)</h4>
+        <p>A aplicação recebe informações por meio dos formulários HTML e realiza operações sobre o banco de dados MySQL. Caso consultas parametrizadas não sejam utilizadas adequadamente em todas as rotas, existe a possibilidade de exploração por meio de ataques de SQL Injection.</p>
+        <p><strong>Mitigação:</strong> Utilização exclusiva de consultas parametrizadas (<em>prepared statements</em>) e aplicação do princípio do menor privilégio aos usuários do banco de dados.</p>
+      </div>
+
+      <div class="vuln-card">
+        <h4>Ausência de Criptografia das Comunicações</h4>
+        <p>A aplicação encontra-se acessível por meio do protocolo HTTP, sem utilização de TLS. Essa característica permite que os dados trafeguem em texto puro, possibilitando ataques de interceptação e comprometendo a confidencialidade das informações dos pacientes.</p>
+        <p><strong>Mitigação:</strong> Utilização de um proxy reverso Nginx associado a certificados digitais TLS, permitindo a utilização do protocolo HTTPS.</p>
+      </div>
+
+      <div class="vuln-card">
+        <h4>Ausência de Controle de Acesso e Autenticação</h4>
+        <p>Foi identificado que a aplicação não implementa mecanismos de autenticação e autorização. Dessa forma, qualquer usuário que possua acesso ao endereço da aplicação pode visualizar, alterar ou excluir registros de pacientes.</p>
+        <p><strong>Mitigação:</strong> Implementação de autenticação baseada em sessões utilizando Flask-Login, associada a um modelo RBAC (<em>Role Based Access Control</em>), permitindo diferentes níveis de permissão conforme o perfil do usuário.</p>
+      </div>
+
+      <h3>Divisão das Atividades da Etapa</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Integrantes</th><th>Responsabilidade</th></tr></thead>
+          <tbody>
+            <tr><td>Athos</td><td>PSI, desenvolvimento da aplicação web Flask, configuração do MySQL e implantação local/nuvem</td></tr>
+            <tr><td>Pedro</td><td>PSI, revisão da documentação e suporte ao desenvolvimento</td></tr>
+            <tr><td>Bernardo</td><td>Elaboração e design da cartilha de boas práticas de acesso seguro</td></tr>
+            <tr><td>Henrique</td><td>Elaboração e revisão da cartilha de boas práticas</td></tr>
+            <tr><td>Igor</td><td>Redação e estruturação do relatório técnico, documentação do ambiente e análise de vulnerabilidades</td></tr>
+            <tr><td>Fabrício</td><td>Redação e revisão do relatório técnico e documentação das vulnerabilidades</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Conclusão da Etapa 4</h3>
+      <p>A Etapa 4 permitiu consolidar os mecanismos de segurança da informação da Rede Hospitalar Cuidar, integrando aspectos técnicos e organizacionais. Além da elaboração da Política de Segurança da Informação e da cartilha de conscientização, foi desenvolvida e implantada uma aplicação web para gerenciamento de pacientes, demonstrando a integração entre infraestrutura, banco de dados e desenvolvimento de software.</p>
+      <p>A análise das vulnerabilidades possibilitou identificar pontos de melhoria e propor mecanismos de mitigação alinhados às recomendações do OWASP Top 10 e às exigências da LGPD, contribuindo para aumentar a maturidade de segurança da solução implementada.</p>
 
     </div>
   </section>
@@ -763,46 +858,84 @@
   <section id="etapa5" class="card">
     <div class="card-header">
       <span class="badge">ETAPA 5</span>
-      <h2>A Definir</h2>
+      <h2>Elaboração da Apresentação Final do Projeto</h2>
     </div>
     <div class="card-body">
-      <div class="callout pending">Este capítulo será preenchido na entrega da Etapa 5.</div>
+
+      <h3>Objetivo da Etapa</h3>
+      <p>A quinta etapa do projeto teve como objetivo consolidar os resultados obtidos ao longo do desenvolvimento da infraestrutura da Rede Hospitalar Cuidar em uma apresentação final, permitindo a exposição organizada das soluções implementadas e dos resultados alcançados pelo grupo.</p>
+      <p>A apresentação foi desenvolvida utilizando a plataforma <strong>Overleaf</strong>, por meio da classe <em>Beamer</em> em LaTeX, possibilitando a elaboração colaborativa do material e a padronização visual dos slides.</p>
+
+      <h3>Organização e Colaboração da Equipe</h3>
+      <p>Seguindo a metodologia de trabalho adotada nas etapas anteriores, todos os integrantes participaram ativamente da construção da apresentação, sendo responsáveis pela elaboração dos slides referentes às atividades que desenvolveram durante o projeto.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Integrantes</th><th>Responsabilidade</th></tr></thead>
+          <tbody>
+            <tr><td>Igor e Pedro</td><td>Slides de planejamento da infraestrutura e serviços em nuvem</td></tr>
+            <tr><td>Henrique</td><td>Conteúdos de virtualização, Active Directory e configuração dos servidores</td></tr>
+            <tr><td>Bernardo e Athos</td><td>Organização visual, inserção das evidências e revisão do material</td></tr>
+            <tr><td>Fabrício</td><td>Revisão textual, padronização da documentação e organização lógica</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Estrutura da Apresentação</h3>
+      <p>A apresentação foi organizada de forma a representar cronologicamente as etapas do projeto:</p>
+      <ol>
+        <li>Planejamento da infraestrutura da Rede Hospitalar Cuidar</li>
+        <li>Implantação do ambiente em nuvem e virtualização local</li>
+        <li>Configuração dos serviços e do Active Directory</li>
+        <li>Monitoramento da infraestrutura por meio do Zabbix</li>
+        <li>Aplicação das práticas de segurança da informação</li>
+        <li>Demonstração da aplicação CRUD desenvolvida para gerenciamento de pacientes</li>
+        <li>Principais vulnerabilidades identificadas e recomendações de mitigação</li>
+        <li>Conclusões gerais do projeto</li>
+      </ol>
+
+      <h3>Resultados Obtidos</h3>
+      <p>A evolução da apresentação permitiu consolidar todos os conhecimentos desenvolvidos ao longo do semestre, reunindo em um único material as evidências, resultados e soluções implementadas para a Rede Hospitalar Cuidar. Além disso, a atividade proporcionou maior integração entre os membros da equipe, contribuindo para a organização do conteúdo e para a preparação da apresentação final do projeto perante a disciplina.</p>
+
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════ DOCUMENTOS -->
   <section id="documentos" class="card">
     <div class="card-header">
-      <span class="badge">PSI</span>
-      <h2>Política de Segurança da Informação</h2>
+      <span class="badge">DOCS</span>
+      <h2>Documentos do Projeto</h2>
     </div>
     <div class="card-body">
 
-      <p>A <strong>Política de Segurança da Informação (PSI)</strong> da Rede Hospitalar Cuidar
-      (&nbsp;v1.0 &mdash; Junho/2026&nbsp;) formaliza as diretrizes, responsabilidades e
-      controles para proteção dos ativos de informação da organização, em conformidade com
-      a <strong>LGPD</strong>, <strong>ISO/IEC 27001</strong> e
-      <strong>Resolução CFM nº 1.821/2007</strong>.</p>
+      <p>Os seguintes documentos complementares estão disponíveis para consulta:</p>
 
-      <p>O documento completo está disponível em PDF:</p>
-      <p style="text-align:center;margin:1.5rem 0">
-        <a href="PSI_Rede_Hospitalar_Cuidar_OFICIAL_v10_260612_152738.pdf" target="_blank"
-           style="display:inline-block;background:var(--primary);color:#fff;padding:.75rem 2rem;
-                  border-radius:8px;text-decoration:none;font-weight:700;">
-          📄 Baixar PSI (PDF)
-        </a>
-      </p>
-
-      <h3>Domínios abrangidos</h3>
-      <ul>
-        <li><strong>Tríade da segurança</strong> &mdash; confidencialidade, integridade e disponibilidade</li>
-        <li><strong>Gerenciamento de acesso</strong> &mdash; Active Directory, senhas 12+ caracteres, MFA, RBAC</li>
-        <li><strong>Segurança de redes</strong> &mdash; segmentação /24 por unidade, firewalls, monitoramento Zabbix</li>
-        <li><strong>Resposta a incidentes</strong> &mdash; 30 minutos para incidentes de alta severidade</li>
-        <li><strong>Conformidade legal</strong> &mdash; LGPD, Marco Civil, ISO 27001, CFM</li>
-        <li><strong>Gestão de vulnerabilidades</strong> &mdash; patches críticos em até 72h</li>
-        <li><strong>Responsabilidades</strong> &mdash; direção, equipe de TI e todos os colaboradores</li>
-      </ul>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Documento</th><th>Descrição</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><a href="PSI_Rede_Hospitalar_Cuidar_OFICIAL_v10_260612_152738.pdf" target="_blank">📄 PSI</a></td>
+              <td>Política de Segurança da Informação v1.0. Diretrizes, responsabilidades e controles para proteção dos ativos de informação, em conformidade com LGPD, ISO/IEC 27001 e CFM.</td>
+            </tr>
+            <tr>
+              <td><a href="boas-praticas.pdf" target="_blank">📄 Cartilha de Boas Práticas</a></td>
+              <td>Cartilha de conscientização para colaboradores sobre segurança da informação.</td>
+            </tr>
+            <tr>
+              <td><a href="Entrega_5_apresentação.pdf" target="_blank">📄 Apresentação Final (Slides)</a></td>
+              <td>Slides da apresentação final do projeto, desenvolvidos em Overleaf/Beamer.</td>
+            </tr>
+            <tr>
+              <td><a href="Entrega_Final_Eixo_5.pdf" target="_blank">📄 Documento Final</a></td>
+              <td>Documento completo consolidando todo o conteúdo do projeto.</td>
+            </tr>
+            <tr>
+              <td><a href="relatorio-tecnico.pdf" target="_blank">📄 Relatório Técnico</a></td>
+              <td>Relatório técnico original do projeto.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
     </div>
   </section>

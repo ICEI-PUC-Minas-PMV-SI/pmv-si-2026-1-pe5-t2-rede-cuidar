@@ -5,8 +5,8 @@
 - [Etapa 1 — Planejamento e Prototipação](#etapa-1--planejamento-e-prototipação)
 - [Etapa 2 — Preparação do Ambiente em Nuvem e Virtualização Local](#etapa-2--preparação-do-ambiente-em-nuvem-e-virtualização-local)
 - [Etapa 3 — Monitoramento Ativo da Infraestrutura de Servidores](#etapa-3--monitoramento-ativo-da-infraestrutura-de-servidores)
-- [Etapa 4 — CRUD — Cadastro de Pacientes](#etapa-4--crud--cadastro-de-pacientes)
-- [Etapa 5 — A Definir](#etapa-5--a-definir)
+- [Etapa 4 — Segurança da Informação e Aplicação Back-End](#etapa-4--segurança-da-informação-e-aplicação-back-end)
+- [Etapa 5 — Elaboração da Apresentação Final do Projeto](#etapa-5--elaboração-da-apresentação-final-do-projeto)
 
 ---
 
@@ -309,28 +309,58 @@ Os dados exibem o tráfego que cruza a placa de rede virtual conectada à VPC. A
 
 ---
 
-## Etapa 4 — CRUD — Cadastro de Pacientes
+## Etapa 4 — Segurança da Informação e Aplicação Back-End
 
 ### Introdução
 
-A Etapa 4 consiste no desenvolvimento de um sistema **CRUD** (Create, Read,
-Update, Delete) para cadastro de pacientes da Rede Hospitalar Cuidar. A
-aplicação foi construída em **Python com Flask** e banco de dados **MySQL**,
-permitindo o gerenciamento completo dos registros de pacientes.
+A Etapa 4 do projeto da Rede Hospitalar Cuidar teve como objetivo fortalecer os aspectos relacionados à segurança da informação da infraestrutura desenvolvida nas etapas anteriores. Além da elaboração da **Política de Segurança da Informação (PSI)**, foi desenvolvida uma aplicação web para gerenciamento de pacientes, bem como uma **cartilha de conscientização** voltada aos colaboradores da organização.
 
-### Funcionalidades Implementadas
+Adicionalmente, foram realizadas análises de vulnerabilidades do ambiente implantado, permitindo identificar riscos potenciais e propor mecanismos de mitigação alinhados às boas práticas recomendadas pelo OWASP Top 10 e às exigências da Lei Geral de Proteção de Dados (LGPD).
 
-- **Listar** todos os pacientes cadastrados
-- **Cadastrar** novo paciente (nome, CPF, nascimento, unidade)
-- **Editar** registro existente
-- **Remover** paciente com confirmação
+### Política de Segurança da Informação
 
-### Unidades de Atendimento
+Com o objetivo de estabelecer diretrizes formais para proteção dos ativos de informação da organização, foi elaborada a **Política de Segurança da Informação (PSI)** da Rede Hospitalar Cuidar. O documento foi desenvolvido com base nas recomendações da norma ABNT NBR ISO/IEC 27001 e contempla os princípios fundamentais de confidencialidade, integridade e disponibilidade das informações.
 
-O sistema contempla as cinco unidades da rede: Matriz — BH, Secretaria,
-UPA 1, UPA 2 e UPA 3.
+Os principais tópicos abordados pela política são:
 
-### Tecnologias Utilizadas
+- Controle de acesso e autenticação
+- Segurança física e ambiental
+- Proteção das redes e comunicações
+- Gestão de incidentes de segurança
+- Programas de treinamento e conscientização
+- Avaliação contínua dos mecanismos de segurança
+- Conformidade com requisitos legais e regulatórios
+
+A PSI estabelece responsabilidades para todos os colaboradores da instituição e define procedimentos para garantir a proteção das informações sensíveis manipuladas pela organização.
+
+### Cartilha de Boas Práticas de Acesso Seguro
+
+Complementando a Política de Segurança da Informação, foi desenvolvida uma cartilha de boas práticas destinada aos colaboradores da Rede Hospitalar Cuidar. A cartilha foi elaborada em linguagem acessível, buscando conscientizar os usuários sobre os principais riscos de segurança presentes no ambiente corporativo.
+
+Os assuntos abordados incluem:
+
+- Criação e utilização segura de senhas
+- Identificação de tentativas de phishing
+- Engenharia social
+- Cuidados no tratamento dos dados dos pacientes
+- Procedimentos de reporte de incidentes
+- Recomendações para acesso remoto seguro
+
+A adoção dessas práticas contribui para reduzir riscos operacionais e fortalecer a cultura de segurança da informação dentro da organização.
+
+### Aplicação Web para Gestão de Pacientes
+
+Como parte das entregas desta etapa, foi desenvolvida uma aplicação web para gerenciamento de pacientes da Rede Hospitalar Cuidar. A solução foi implementada utilizando o framework **Flask** em conjunto com o banco de dados **MySQL**, permitindo a realização das operações fundamentais de um sistema CRUD (*Create, Read, Update and Delete*).
+
+#### Funcionalidades Implementadas
+
+- Cadastro de pacientes
+- Consulta dos registros armazenados
+- Atualização das informações cadastradas
+- Exclusão de pacientes
+- Associação dos pacientes às unidades de atendimento da rede
+
+#### Tecnologias Utilizadas
 
 | Componente | Tecnologia |
 | --- | --- |
@@ -340,7 +370,7 @@ UPA 1, UPA 2 e UPA 3.
 | Front-end | HTML5 + CSS3 (Jinja2) |
 | Servidor | Ubuntu Server (192.168.18.75) |
 
-### Estrutura do Projeto
+#### Estrutura do Projeto
 
 ```
 crud-cuidar/
@@ -354,29 +384,107 @@ crud-cuidar/
     └── editar.html      # Formulário de edição
 ```
 
-### Implantação
+#### Evidências da Aplicação
 
-A aplicação foi implantada no servidor Ubuntu local da Matriz
-(`192.168.18.75`), acessível via navegador na porta `5000`. O banco de
-dados `hospital_cuidar` roda no mesmo servidor, garantindo baixa latência
-nas operações.
+![Tela inicial da aplicação de gerenciamento de pacientes](Eixo_5/tela_de_inicio.png)
+
+![Formulário de cadastro de pacientes](Eixo_5/cadastro_de_pacientes.png)
+
+![Listagem dos pacientes cadastrados no sistema](Eixo_5/paciente_cadastrado.png)
+
+![Tela de edição dos dados de um paciente](Eixo_5/editar_paciente.png)
+
+#### Implantação
+
+A aplicação foi disponibilizada tanto no ambiente local (servidor Ubuntu `192.168.18.75`, porta `5000`) quanto no ambiente em nuvem, permitindo validar a integração entre os serviços de infraestrutura implementados ao longo do projeto. O banco de dados `hospital_cuidar` roda no mesmo servidor, garantindo baixa latência nas operações.
+
+### Análise de Vulnerabilidades
+
+Com base na infraestrutura implantada para hospedar a aplicação da Rede Hospitalar Cuidar, foram identificadas três vulnerabilidades classificadas segundo o **OWASP Top 10 (2021)**.
+
+#### Injeção de SQL (SQL Injection)
+
+A aplicação recebe informações por meio dos formulários HTML e realiza operações sobre o banco de dados MySQL. Caso consultas parametrizadas não sejam utilizadas adequadamente em todas as rotas da aplicação, existe a possibilidade de exploração por meio de ataques de SQL Injection.
+
+**Mitigação:** Utilização exclusiva de consultas parametrizadas (*prepared statements*) e aplicação do princípio do menor privilégio aos usuários do banco de dados.
+
+#### Ausência de Criptografia das Comunicações
+
+A aplicação encontra-se acessível por meio do protocolo HTTP, sem utilização de TLS. Essa característica permite que os dados trafeguem em texto puro, possibilitando ataques de interceptação e comprometendo a confidencialidade das informações dos pacientes.
+
+**Mitigação:** Utilização de um proxy reverso Nginx associado a certificados digitais TLS, permitindo a utilização do protocolo HTTPS.
+
+#### Ausência de Controle de Acesso e Autenticação
+
+Foi identificado que a aplicação não implementa mecanismos de autenticação e autorização. Dessa forma, qualquer usuário que possua acesso ao endereço da aplicação pode visualizar, alterar ou excluir registros de pacientes.
+
+**Mitigação:** Implementação de autenticação baseada em sessões utilizando Flask-Login, associada a um modelo RBAC (*Role Based Access Control*), permitindo diferentes níveis de permissão conforme o perfil do usuário.
+
+### Divisão das Atividades da Etapa
+
+| Integrantes | Responsabilidade |
+|---|---|
+| Athos | PSI, desenvolvimento da aplicação web Flask, configuração do MySQL e implantação local/nuvem |
+| Pedro | PSI, revisão da documentação e suporte ao desenvolvimento |
+| Bernardo | Elaboração e design da cartilha de boas práticas de acesso seguro |
+| Henrique | Elaboração e revisão da cartilha de boas práticas |
+| Igor | Redação e estruturação do relatório técnico, documentação do ambiente e análise de vulnerabilidades |
+| Fabrício | Redação e revisão do relatório técnico e documentação das vulnerabilidades |
+
+### Conclusão da Etapa 4
+
+A Etapa 4 permitiu consolidar os mecanismos de segurança da informação da Rede Hospitalar Cuidar, integrando aspectos técnicos e organizacionais. Além da elaboração da Política de Segurança da Informação e da cartilha de conscientização, foi desenvolvida e implantada uma aplicação web para gerenciamento de pacientes, demonstrando a integração entre infraestrutura, banco de dados e desenvolvimento de software.
+
+A análise das vulnerabilidades possibilitou identificar pontos de melhoria e propor mecanismos de mitigação alinhados às recomendações do OWASP Top 10 e às exigências da LGPD, contribuindo para aumentar a maturidade de segurança da solução implementada.
 
 ---
 
 ## Documentos
 
-- [📄 Política de Segurança da Informação — PSI (PDF)](PSI_Rede_Hospitalar_Cuidar_OFICIAL_v10_260612_152738.pdf)
-  — Política de Segurança da Informação v1.0 (Junho/2026). Documento formal que estabelece as diretrizes, responsabilidades e controles para proteção dos ativos de informação da Rede Hospitalar Cuidar, em conformidade com a LGPD, ISO/IEC 27001 e Resolução CFM nº 1.821/2007. Abrange:
-  - **Tríade da segurança**: confidencialidade, integridade e disponibilidade
-  - **Gerenciamento de acesso**: Active Directory, senhas 12+ caracteres, MFA, RBAC
-  - **Segurança de redes**: segmentação /24 por unidade, firewalls, monitoramento Zabbix
-  - **Resposta a incidentes**: 30 minutos para incidentes de alta severidade
-  - **Conformidade legal**: LGPD, Marco Civil, ISO 27001, CFM
-  - **Gestão de vulnerabilidades**: patches críticos em até 72h
-  - **Responsabilidades**: direção, equipe de TI e todos os colaboradores
+| Documento | Descrição |
+|---|---|
+| [📄 Política de Segurança da Informação — PSI](PSI_Rede_Hospitalar_Cuidar_OFICIAL_v10_260612_152738.pdf) | PSI v1.0 (Junho/2026). Diretrizes, responsabilidades e controles para proteção dos ativos de informação, em conformidade com LGPD, ISO/IEC 27001 e Resolução CFM nº 1.821/2007. Abrange: tríade da segurança, gerenciamento de acesso (AD, senhas 12+ chars, MFA, RBAC), segurança de redes (segmentação /24, firewalls, Zabbix), resposta a incidentes (30 min alta severidade), conformidade legal, gestão de vulnerabilidades (patches críticos em 72h) e responsabilidades. |
+| [📄 Cartilha de Boas Práticas de Acesso Seguro](boas-praticas.pdf) | Cartilha de conscientização para colaboradores sobre segurança da informação: senhas seguras, phishing, engenharia social, proteção de dados de pacientes e acesso remoto seguro. |
+| [📄 Apresentação Final (Slides)](Entrega_5_apresentação.pdf) | Slides da apresentação final do projeto, desenvolvidos em Overleaf/Beamer, cobrindo todas as 5 etapas do projeto. |
+| [📄 Documento Final do Projeto](Entrega_Final_Eixo_5.pdf) | Documento completo consolidando todo o conteúdo do projeto, incluindo planejamento, implementação, monitoramento, segurança e conclusões. |
+| [📄 Relatório Técnico](relatorio-tecnico.pdf) | Relatório técnico original do projeto. |
 
 ---
 
-## Etapa 5 — A Definir
+## Etapa 5 — Elaboração da Apresentação Final do Projeto
 
-> Este capítulo será preenchido na entrega da Etapa 5.
+### Objetivo da Etapa
+
+A quinta etapa do projeto teve como objetivo consolidar os resultados obtidos ao longo do desenvolvimento da infraestrutura da Rede Hospitalar Cuidar em uma apresentação final, permitindo a exposição organizada das soluções implementadas e dos resultados alcançados pelo grupo.
+
+A apresentação foi desenvolvida utilizando a plataforma **Overleaf**, por meio da classe *Beamer* em LaTeX, possibilitando a elaboração colaborativa do material e a padronização visual dos slides.
+
+### Organização e Colaboração da Equipe
+
+Seguindo a metodologia de trabalho adotada nas etapas anteriores, todos os integrantes participaram ativamente da construção da apresentação, sendo responsáveis pela elaboração dos slides referentes às atividades que desenvolveram durante o projeto.
+
+| Integrantes | Responsabilidade |
+|---|---|
+| Igor e Pedro | Slides de planejamento da infraestrutura e serviços em nuvem |
+| Henrique | Conteúdos de virtualização, Active Directory e configuração dos servidores |
+| Bernardo e Athos | Organização visual, inserção das evidências e revisão do material |
+| Fabrício | Revisão textual, padronização da documentação e organização lógica |
+
+### Estrutura da Apresentação
+
+A apresentação foi organizada de forma a representar cronologicamente as etapas do projeto:
+
+1. Planejamento da infraestrutura da Rede Hospitalar Cuidar
+2. Implantação do ambiente em nuvem e virtualização local
+3. Configuração dos serviços e do Active Directory
+4. Monitoramento da infraestrutura por meio do Zabbix
+5. Aplicação das práticas de segurança da informação
+6. Demonstração da aplicação CRUD desenvolvida para gerenciamento de pacientes
+7. Principais vulnerabilidades identificadas e recomendações de mitigação
+8. Conclusões gerais do projeto
+
+### Resultados Obtidos
+
+A evolução da apresentação permitiu consolidar todos os conhecimentos desenvolvidos ao longo do semestre, reunindo em um único material as evidências, resultados e soluções implementadas para a Rede Hospitalar Cuidar. Além disso, a atividade proporcionou maior integração entre os membros da equipe, contribuindo para a organização do conteúdo e para a preparação da apresentação final do projeto perante a disciplina.
+
+---
