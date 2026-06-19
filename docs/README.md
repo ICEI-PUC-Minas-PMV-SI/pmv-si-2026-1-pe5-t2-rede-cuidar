@@ -443,11 +443,11 @@ A análise das vulnerabilidades possibilitou identificar pontos de melhoria e pr
 
 | Documento | Descrição |
 |---|---|
-| [📄 Política de Segurança da Informação — PSI](PSI_Rede_Hospitalar_Cuidar_OFICIAL_v10_260612_152738.pdf) | PSI v1.0 (Junho/2026). Diretrizes, responsabilidades e controles para proteção dos ativos de informação, em conformidade com LGPD, ISO/IEC 27001 e Resolução CFM nº 1.821/2007. Abrange: tríade da segurança, gerenciamento de acesso (AD, senhas 12+ chars, MFA, RBAC), segurança de redes (segmentação /24, firewalls, Zabbix), resposta a incidentes (30 min alta severidade), conformidade legal, gestão de vulnerabilidades (patches críticos em 72h) e responsabilidades. |
-| [📄 Cartilha de Boas Práticas de Acesso Seguro](boas-praticas.pdf) | Cartilha de conscientização para colaboradores sobre segurança da informação: senhas seguras, phishing, engenharia social, proteção de dados de pacientes e acesso remoto seguro. |
-| [📄 Apresentação Final (Slides)](Entrega_5_apresentação.pdf) | Slides da apresentação final do projeto, desenvolvidos em Overleaf/Beamer, cobrindo todas as 5 etapas do projeto. |
-| [📄 Documento Final do Projeto](Entrega_Final_Eixo_5.pdf) | Documento completo consolidando todo o conteúdo do projeto, incluindo planejamento, implementação, monitoramento, segurança e conclusões. |
-| [📄 Relatório Técnico](relatorio-tecnico.pdf) | Relatório técnico original do projeto. |
+| [📄 Política de Segurança da Informação — PSI](PSI_Rede_Hospitalar_Cuidar.pdf) | PSI v1.0 (Junho/2026). Diretrizes, responsabilidades e controles para proteção dos ativos de informação, em conformidade com LGPD, ISO/IEC 27001 e Resolução CFM nº 1.821/2007. Abrange: tríade da segurança, gerenciamento de acesso (AD, senhas 12+ chars, MFA, RBAC), segurança de redes (segmentação /24, firewalls, Zabbix), resposta a incidentes (30 min alta severidade), conformidade legal, gestão de vulnerabilidades (patches críticos em 72h) e responsabilidades. |
+| [📄 Cartilha de Boas Práticas de Acesso Seguro](Cartilha_Boas_Praticas_Rede_Hospitalar_Cuidar.pdf) | Cartilha de conscientização para colaboradores sobre segurança da informação: senhas seguras, phishing, engenharia social, proteção de dados de pacientes e acesso remoto seguro. |
+| [📄 Apresentação Final (Slides)](Apresentação_Rede_Hospitalar_Cuidar.pdf) | Slides da apresentação final do projeto, desenvolvidos em Overleaf/Beamer, cobrindo todas as 5 etapas do projeto. |
+| [📄 Documento Final do Projeto](Entrega_Final_Eixo_5_Rede_Hospitalar_Cuidar.pdf) | Documento completo consolidando todo o conteúdo do projeto, incluindo planejamento, implementação, monitoramento, segurança e conclusões. |
+| [📄 Relatório Técnico](Relatorio_Tecnico_Rede_Hospitalar_Cuidar.pdf) | Relatório técnico original do projeto. |
 
 ---
 
